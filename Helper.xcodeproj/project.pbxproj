@@ -14,10 +14,6 @@
 		A86185F1246C258100B5300B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A86185EF246C258100B5300B /* Main.storyboard */; };
 		A86185F3246C258200B5300B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A86185F2246C258200B5300B /* Assets.xcassets */; };
 		A86185F6246C258200B5300B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A86185F4246C258200B5300B /* LaunchScreen.storyboard */; };
-		A9512819246C2A29005ED0C9 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9512818246C2A29005ED0C9 /* SignInViewController.swift */; };
-		A951281B246C2A40005ED0C9 /* SignInNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A951281A246C2A40005ED0C9 /* SignInNavigationController.swift */; };
-		A9512820246C2A71005ED0C9 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A951281F246C2A71005ED0C9 /* RegisterViewController.swift */; };
-		A9512822246C2A82005ED0C9 /* RestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9512821246C2A82005ED0C9 /* RestoreViewController.swift */; };
 		A9512824246C2AAE005ED0C9 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9512823246C2AAE005ED0C9 /* CustomColor.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,10 +28,6 @@
 		A86185F2246C258200B5300B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A86185F5246C258200B5300B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A86185F7246C258200B5300B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A9512818246C2A29005ED0C9 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		A951281A246C2A40005ED0C9 /* SignInNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInNavigationController.swift; sourceTree = "<group>"; };
-		A951281F246C2A71005ED0C9 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		A9512821246C2A82005ED0C9 /* RestoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreViewController.swift; sourceTree = "<group>"; };
 		A9512823246C2AAE005ED0C9 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		EC33E28AF437591A0F23155C /* Pods-Helper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Helper.release.xcconfig"; path = "Target Support Files/Pods-Helper/Pods-Helper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,7 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				A951281E246C2A5D005ED0C9 /* Custom */,
-				A9512816246C2A0B005ED0C9 /* Screens */,
 				A86185E9246C258100B5300B /* AppDelegate.swift */,
 				A86185EB246C258100B5300B /* SceneDelegate.swift */,
 				A86185ED246C258100B5300B /* ViewController.swift */,
@@ -84,41 +75,6 @@
 				A86185F7246C258200B5300B /* Info.plist */,
 			);
 			path = Helper;
-			sourceTree = "<group>";
-		};
-		A9512816246C2A0B005ED0C9 /* Screens */ = {
-			isa = PBXGroup;
-			children = (
-				A951281D246C2A52005ED0C9 /* RestoreVC */,
-				A951281C246C2A43005ED0C9 /* RegisterVC */,
-				A9512817246C2A14005ED0C9 /* SignInVC */,
-			);
-			path = Screens;
-			sourceTree = "<group>";
-		};
-		A9512817246C2A14005ED0C9 /* SignInVC */ = {
-			isa = PBXGroup;
-			children = (
-				A9512818246C2A29005ED0C9 /* SignInViewController.swift */,
-				A951281A246C2A40005ED0C9 /* SignInNavigationController.swift */,
-			);
-			path = SignInVC;
-			sourceTree = "<group>";
-		};
-		A951281C246C2A43005ED0C9 /* RegisterVC */ = {
-			isa = PBXGroup;
-			children = (
-				A951281F246C2A71005ED0C9 /* RegisterViewController.swift */,
-			);
-			path = RegisterVC;
-			sourceTree = "<group>";
-		};
-		A951281D246C2A52005ED0C9 /* RestoreVC */ = {
-			isa = PBXGroup;
-			children = (
-				A9512821246C2A82005ED0C9 /* RestoreViewController.swift */,
-			);
-			path = RestoreVC;
 			sourceTree = "<group>";
 		};
 		A951281E246C2A5D005ED0C9 /* Custom */ = {
@@ -261,11 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A951281B246C2A40005ED0C9 /* SignInNavigationController.swift in Sources */,
-				A9512822246C2A82005ED0C9 /* RestoreViewController.swift in Sources */,
-				A9512819246C2A29005ED0C9 /* SignInViewController.swift in Sources */,
 				A86185EE246C258100B5300B /* ViewController.swift in Sources */,
-				A9512820246C2A71005ED0C9 /* RegisterViewController.swift in Sources */,
 				A86185EA246C258100B5300B /* AppDelegate.swift in Sources */,
 				A9512824246C2AAE005ED0C9 /* CustomColor.swift in Sources */,
 				A86185EC246C258100B5300B /* SceneDelegate.swift in Sources */,
