@@ -14,6 +14,7 @@
 		A86185F1246C258100B5300B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A86185EF246C258100B5300B /* Main.storyboard */; };
 		A86185F3246C258200B5300B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A86185F2246C258200B5300B /* Assets.xcassets */; };
 		A86185F6246C258200B5300B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A86185F4246C258200B5300B /* LaunchScreen.storyboard */; };
+		A8AAF066246C348000017813 /* Screens in Resources */ = {isa = PBXBuildFile; fileRef = A8AAF065246C348000017813 /* Screens */; };
 		A9512824246C2AAE005ED0C9 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9512823246C2AAE005ED0C9 /* CustomColor.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 		A86185F2246C258200B5300B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A86185F5246C258200B5300B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A86185F7246C258200B5300B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8AAF065246C348000017813 /* Screens */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Screens; sourceTree = "<group>"; };
 		A9512823246C2AAE005ED0C9 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		EC33E28AF437591A0F23155C /* Pods-Helper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Helper.release.xcconfig"; path = "Target Support Files/Pods-Helper/Pods-Helper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +67,7 @@
 		A86185E8246C258100B5300B /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				A8AAF065246C348000017813 /* Screens */,
 				A951281E246C2A5D005ED0C9 /* Custom */,
 				A86185E9246C258100B5300B /* AppDelegate.swift */,
 				A86185EB246C258100B5300B /* SceneDelegate.swift */,
@@ -164,6 +167,7 @@
 			files = (
 				A86185F6246C258200B5300B /* LaunchScreen.storyboard in Resources */,
 				A86185F3246C258200B5300B /* Assets.xcassets in Resources */,
+				A8AAF066246C348000017813 /* Screens in Resources */,
 				A86185F1246C258100B5300B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
