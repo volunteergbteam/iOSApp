@@ -23,6 +23,7 @@ class TabViewController: UITabBarController, MDCBottomNavigationBarDelegate {
         containerScheme.colorScheme = colorScheme
         bottomNavBar.applyPrimaryTheme(withScheme: containerScheme)
         bottomNavBar.tintColor = .white
+        bottomNavBar.selectedItemTitleColor = .white
         bottomNavBar.shadowColor = .clear
         
         view.backgroundColor = colorScheme.backgroundColor
@@ -44,9 +45,7 @@ class TabViewController: UITabBarController, MDCBottomNavigationBarDelegate {
     
     
     func bottomNavigationBar(_ bottomNavigationBar: MDCBottomNavigationBar, didSelect item: UITabBarItem){
-        guard let fromView = selectedViewController?.view, let toView = customizableViewControllers?[item.tag].view else {
-            return
-        }
+        guard let fromView = selectedViewController?.view, let toView = customizableViewControllers?[item.tag].view else { return }
         
         if fromView != toView {
             UIView.transition(from: fromView, to: toView, duration: 0.3, options: [.transitionCrossDissolve], completion: nil)

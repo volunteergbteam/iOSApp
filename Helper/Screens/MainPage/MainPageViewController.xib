@@ -9,6 +9,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainPageViewController" customModule="Helper" customModuleProvider="target">
             <connections>
+                <outlet property="askForHelpButton" destination="IoE-XF-FSG" id="9gS-hd-5Ms"/>
+                <outlet property="mapView" destination="TGX-fs-IVK" id="fHu-3h-xDD"/>
+                <outlet property="searchField" destination="6f5-Yg-bH0" id="AlZ-xH-Ao7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,7 +19,42 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TGX-fs-IVK">
+                    <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                </mapView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IoE-XF-FSG" customClass="MDCFlatButton">
+                    <rect key="frame" x="20" y="728" width="374" height="45"/>
+                    <color key="backgroundColor" red="0.0" green="0.58823529411764708" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="Q2g-QD-LAH"/>
+                    </constraints>
+                    <state key="normal" title="Хочу попросить о помощи">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Что-то искали ?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6f5-Yg-bH0">
+                    <rect key="frame" x="25" y="128" width="364" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="MoX-4l-N1u"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+            </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="TGX-fs-IVK" secondAttribute="trailing" id="2cs-XA-lsQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6f5-Yg-bH0" secondAttribute="trailing" constant="25" id="6Tj-HP-brq"/>
+                <constraint firstItem="TGX-fs-IVK" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="D1L-IW-s8f"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IoE-XF-FSG" secondAttribute="trailing" constant="20" id="F1i-k3-PpS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="TGX-fs-IVK" secondAttribute="bottom" id="Kh5-cv-9hm"/>
+                <constraint firstItem="IoE-XF-FSG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="M7w-fs-dKa"/>
+                <constraint firstItem="TGX-fs-IVK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="eh7-Lh-rNR"/>
+                <constraint firstItem="6f5-Yg-bH0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="25" id="ero-d3-UlP"/>
+                <constraint firstItem="6f5-Yg-bH0" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="40" id="uTf-Jm-RbR"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="IoE-XF-FSG" secondAttribute="bottom" constant="40" id="xkh-fZ-VLW"/>
+            </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
