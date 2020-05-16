@@ -278,7 +278,9 @@ extension SignInViewController {
     
     @objc func logInAction(_ sender: UIButton!) {
         // fix me
-        print("Oyy press me log")
+        let mainPage = TabViewController()
+        mainPage.modalPresentationStyle = .fullScreen
+        self.navigationController?.present(mainPage, animated: true, completion: nil)
     }
     
     @objc func restoreAction(_ sender: UIButton!) {
