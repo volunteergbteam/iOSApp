@@ -1,7 +1,16 @@
 
 import UIKit
+import MaterialComponents.MaterialButtons
+import MaterialComponents.MaterialButtons_Theming
+import MaterialComponents.MaterialColorScheme
 
 class RegisterViewController: UIViewController {
+    
+    let scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     var titleLabel = UILabel()
     
@@ -24,12 +33,21 @@ class RegisterViewController: UIViewController {
     var checkmarkButton = UIButton()
     var checkmarkLabel = UILabel()
     
-    var regButton = UIButton()
+    var regButton = MDCButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        self.view.addSubview(scrollView)
+        
+        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor , constant: -85).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        
+        scrollView.isScrollEnabled = true
+        
         keyboardSetting()
         addSubviewElements()
         setupElements()
@@ -66,22 +84,22 @@ class RegisterViewController: UIViewController {
     }
     
     private func addSubviewElements(){
-        view.addSubview(titleLabel)
-        view.addSubview(logLabel)
-        view.addSubview(logTextField)
-        view.addSubview(logLine)
-        view.addSubview(pasLabel)
-        view.addSubview(pasTextField)
-        view.addSubview(pasLine)
-        view.addSubview(repPasLabel)
-        view.addSubview(repPasTextField)
-        view.addSubview(repPasLine)
-        view.addSubview(numLabel)
-        view.addSubview(numTextField)
-        view.addSubview(numLine)
-        view.addSubview(checkmarkLabel)
-        view.addSubview(checkmarkButton)
-        view.addSubview(regButton)
+        scrollView.addSubview(titleLabel)
+        scrollView.addSubview(logLabel)
+        scrollView.addSubview(logTextField)
+        scrollView.addSubview(logLine)
+        scrollView.addSubview(pasLabel)
+        scrollView.addSubview(pasTextField)
+        scrollView.addSubview(pasLine)
+        scrollView.addSubview(repPasLabel)
+        scrollView.addSubview(repPasTextField)
+        scrollView.addSubview(repPasLine)
+        scrollView.addSubview(numLabel)
+        scrollView.addSubview(numTextField)
+        scrollView.addSubview(numLine)
+        scrollView.addSubview(checkmarkLabel)
+        scrollView.addSubview(checkmarkButton)
+        scrollView.addSubview(regButton)
     }
     
     private func setupElements() {
@@ -104,11 +122,11 @@ class RegisterViewController: UIViewController {
     }
     
     private func setupTitle() {
-        titleLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -30).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 50).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 40).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         titleLabel.textAlignment = .left
         titleLabel.text = "Регистрация"
         titleLabel.font = UIFont.systemFont(ofSize: 20)
@@ -118,8 +136,8 @@ class RegisterViewController: UIViewController {
     
     private func setupLogLabel() {
         logLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50).isActive = true
-        logLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        logLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        logLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        logLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         logLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         logLabel.font = UIFont.systemFont(ofSize: 15)
@@ -129,8 +147,8 @@ class RegisterViewController: UIViewController {
     
     private func setupLogField() {
         logTextField.topAnchor.constraint(equalTo: logLabel.bottomAnchor, constant: 0).isActive = true
-        logTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        logTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        logTextField.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        logTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         logTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         logTextField.backgroundColor = .clear
@@ -143,8 +161,8 @@ class RegisterViewController: UIViewController {
     
     private func setupLogLine() {
         logLine.topAnchor.constraint(equalTo: logTextField.bottomAnchor, constant: 0).isActive = true
-        logLine.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        logLine.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        logLine.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        logLine.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         logLine.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         logLine.alpha = 12/100
         
@@ -153,8 +171,8 @@ class RegisterViewController: UIViewController {
     
     private func setupNumLabel() {
         numLabel.topAnchor.constraint(equalTo: logTextField.bottomAnchor, constant: 5).isActive = true
-        numLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        numLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        numLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        numLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         numLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         numLabel.font = UIFont.systemFont(ofSize: 15)
@@ -164,8 +182,8 @@ class RegisterViewController: UIViewController {
     
     private func setupNumField() {
         numTextField.topAnchor.constraint(equalTo: numLabel.bottomAnchor, constant: 0).isActive = true
-        numTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        numTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        numTextField.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        numTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         numTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         numTextField.backgroundColor = .clear
@@ -188,8 +206,8 @@ class RegisterViewController: UIViewController {
     
     private func setupPasLable() {
         pasLabel.topAnchor.constraint(equalTo: numTextField.bottomAnchor, constant: 5).isActive = true
-        pasLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        pasLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        pasLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        pasLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         pasLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         pasLabel.font = UIFont.systemFont(ofSize: 15)
@@ -199,8 +217,8 @@ class RegisterViewController: UIViewController {
     
     private func setupPasField() {
         pasTextField.topAnchor.constraint(equalTo: pasLabel.bottomAnchor, constant: 0).isActive = true
-        pasTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        pasTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        pasTextField.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        pasTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         pasTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         pasTextField.backgroundColor = .clear
@@ -213,8 +231,8 @@ class RegisterViewController: UIViewController {
     
     private func setupPasLine() {
         pasLine.topAnchor.constraint(equalTo: pasTextField.bottomAnchor, constant: 0).isActive = true
-        pasLine.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        pasLine.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        pasLine.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        pasLine.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         pasLine.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         pasLine.alpha = 12/100
         
@@ -223,8 +241,8 @@ class RegisterViewController: UIViewController {
     
     private func setupRepPasLable() {
         repPasLabel.topAnchor.constraint(equalTo: pasTextField.bottomAnchor, constant: 5).isActive = true
-        repPasLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        repPasLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        repPasLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        repPasLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         repPasLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         repPasLabel.font = UIFont.systemFont(ofSize: 15)
@@ -234,8 +252,8 @@ class RegisterViewController: UIViewController {
     
     private func setupRepPasField() {
         repPasTextField.topAnchor.constraint(equalTo: repPasLabel.bottomAnchor, constant: 0).isActive = true
-        repPasTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        repPasTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        repPasTextField.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        repPasTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         repPasTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         repPasTextField.backgroundColor = .clear
@@ -248,8 +266,8 @@ class RegisterViewController: UIViewController {
     
     private func setupRepPasLine() {
         repPasLine.topAnchor.constraint(equalTo: repPasTextField.bottomAnchor, constant: 0).isActive = true
-        repPasLine.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        repPasLine.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        repPasLine.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        repPasLine.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         repPasLine.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         repPasLine.alpha = 12/100
         
@@ -258,7 +276,7 @@ class RegisterViewController: UIViewController {
     
     private func setupCheckButton() {
         checkmarkButton.topAnchor.constraint(equalTo: repPasTextField.bottomAnchor, constant: 40).isActive = true
-        checkmarkButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
+        checkmarkButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
         checkmarkButton.heightAnchor.constraint(equalToConstant: 25).isActive = true
         checkmarkButton.widthAnchor.constraint(equalToConstant: 25).isActive = true
         
@@ -273,7 +291,7 @@ class RegisterViewController: UIViewController {
     private func setupCheckLabel() {
         checkmarkLabel.topAnchor.constraint(equalTo: repPasTextField.bottomAnchor, constant: 40).isActive = true
         checkmarkLabel.leftAnchor.constraint(equalTo: checkmarkButton.rightAnchor, constant: 10).isActive = true
-        checkmarkLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -100).isActive = true
+        checkmarkLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -100).isActive = true
         checkmarkLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         checkmarkLabel.numberOfLines = 0
@@ -284,16 +302,24 @@ class RegisterViewController: UIViewController {
     }
     
     private func setupRegButton() {
-        regButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        regButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        regButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        regButton.topAnchor.constraint(equalTo: checkmarkLabel.bottomAnchor, constant: 340).isActive = true
+        regButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 0).isActive = true
+        regButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: -5).isActive = true
+        regButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 25).isActive = true
         regButton.heightAnchor.constraint(equalToConstant: 85).isActive = true
         
-        regButton.backgroundColor = CustomColor.shared.greenButton
         regButton.setTitle("ЗАРЕГИСТРИРОВАТЬСЯ", for: .normal)
-        regButton.setTitleColor(.white, for: .normal)
+        let containerScheme = MDCContainerScheme()
+        containerScheme.colorScheme.primaryColor = CustomColor.shared.marineButton
+        regButton.applyContainedTheme(withScheme: containerScheme)
         
         regButton.addTarget(self, action: #selector(registerAction(_:)), for: .touchUpInside)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        scrollView.contentSize.height = regButton.frame.maxY
     }
     
 }

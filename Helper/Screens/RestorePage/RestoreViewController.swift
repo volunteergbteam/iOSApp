@@ -1,5 +1,8 @@
 
 import UIKit
+import MaterialComponents.MaterialButtons
+import MaterialComponents.MaterialButtons_Theming
+import MaterialComponents.MaterialColorScheme
 
 class RestoreViewController: UIViewController {
     
@@ -7,7 +10,7 @@ class RestoreViewController: UIViewController {
     var restoreLabel = UILabel()
     var restoreTextField = UITextField()
     var restoreLineView = UIView()
-    var restoreButton = UIButton()
+    var restoreButton = MDCButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +23,7 @@ class RestoreViewController: UIViewController {
         setupLabel()
         setupTextField()
         setupLine()
-        setupBotton()
+        setupButton()
     }
     
     private func keyboardSetting() {
@@ -51,11 +54,11 @@ class RestoreViewController: UIViewController {
     
     private func setupTitle() {
         titleLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
+        titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50).isActive = true
         titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
         titleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        titleLabel.textAlignment = .center
+        titleLabel.textAlignment = .left
         titleLabel.text = "Восстановление пароля"
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         titleLabel.textColor = CustomColor.shared.grayText
@@ -97,16 +100,17 @@ class RestoreViewController: UIViewController {
         restoreLineView.backgroundColor = CustomColor.shared.grayText
     }
     
-    private func setupBotton() {
+    private func setupButton() {
         restoreButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        restoreButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        restoreButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        restoreButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: -5).isActive = true
+        restoreButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 5).isActive = true
         restoreButton.heightAnchor.constraint(equalToConstant: 85).isActive = true
         
-        restoreButton.backgroundColor = CustomColor.shared.greenButton
         restoreButton.setTitle("ВОССТАНОВИТЬ", for: .normal)
-        restoreButton.setTitleColor(.white, for: .normal)
-        
+        let containerScheme = MDCContainerScheme()
+        containerScheme.colorScheme.primaryColor = CustomColor.shared.marineButton
+        restoreButton.applyContainedTheme(withScheme: containerScheme)
+
         restoreButton.addTarget(self, action: #selector(restoreAction(_:)), for: .touchUpInside)
     }
     

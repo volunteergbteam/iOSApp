@@ -1,6 +1,15 @@
 import UIKit
+import MaterialComponents.MaterialButtons
+import MaterialComponents.MaterialButtons_Theming
+import MaterialComponents.MaterialColorScheme
 
 class SignInViewController: UIViewController {
+    
+    let scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     var logoView = UIImageView()
     var loginLabel = UILabel()
@@ -8,23 +17,28 @@ class SignInViewController: UIViewController {
     var loginTextField = UITextField()
     var passwordTextField = UITextField()
     var restoreLabel = UILabel()
-    var logInButton = UIButton()
-    var registerButton = UIButton()
+    var logInButton = MDCButton()
+    var registerButton = MDCButton()
     
     var firstLineView = UIView()
     var secondLineView = UIView()
     var logLineView = UIView()
     var pasLineView = UIView()
     
-    var shadowLogView = UIView()
-    var shadowRegView = UIView()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .white
+        self.view.addSubview(scrollView)
         
-        keyboardSetting()
+        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 8.0).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor , constant: -85).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -8.0).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        
+        scrollView.isScrollEnabled = true
+        
+        //        keyboardSetting()
         addSubviewElements()
         setupElements()
         
@@ -35,30 +49,26 @@ class SignInViewController: UIViewController {
         setupPasswordLabel()
         setupPasswordField()
         setupLinePas()
-        setupShadowLogView()
         setupLogInButton()
         setupRestoreLabel()
         setupFirstLine()
         setupSecondLine()
-        setupShadowPasView()
         setupRegisterButton()
     }
     
     private func addSubviewElements() {
-        view.addSubview(logoView)
-        view.addSubview(loginLabel)
-        view.addSubview(passwordLabel)
-        view.addSubview(loginTextField)
-        view.addSubview(logLineView)
-        view.addSubview(passwordTextField)
-        view.addSubview(pasLineView)
-        view.addSubview(restoreLabel)
-        view.addSubview(shadowLogView)
-        view.addSubview(logInButton)
-        view.addSubview(shadowRegView)
-        view.addSubview(registerButton)
-        view.addSubview(firstLineView)
-        view.addSubview(secondLineView)
+        scrollView.addSubview(logoView)
+        scrollView.addSubview(loginLabel)
+        scrollView.addSubview(passwordLabel)
+        scrollView.addSubview(loginTextField)
+        scrollView.addSubview(logLineView)
+        scrollView.addSubview(passwordTextField)
+        scrollView.addSubview(pasLineView)
+        scrollView.addSubview(restoreLabel)
+        scrollView.addSubview(logInButton)
+        scrollView.addSubview(registerButton)
+        scrollView.addSubview(firstLineView)
+        scrollView.addSubview(secondLineView)
     }
     
     private func keyboardSetting() {
@@ -78,9 +88,7 @@ class SignInViewController: UIViewController {
         loginTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         restoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        shadowLogView.translatesAutoresizingMaskIntoConstraints = false
         logInButton.translatesAutoresizingMaskIntoConstraints = false
-        shadowRegView.translatesAutoresizingMaskIntoConstraints = false
         registerButton.translatesAutoresizingMaskIntoConstraints = false
         firstLineView.translatesAutoresizingMaskIntoConstraints = false
         logLineView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,10 +97,10 @@ class SignInViewController: UIViewController {
     }
     
     private func setupLogo() {
-        logoView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -80).isActive = true
-        logoView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 80).isActive = true
-        logoView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80).isActive = true
-        logoView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        logoView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -80).isActive = true
+        logoView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 80).isActive = true
+        logoView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 80).isActive = true
+        logoView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
         logoView.image = UIImage(named: "logo")
         logoView.heightAnchor.constraint(equalToConstant: 250).isActive = true
@@ -100,8 +108,8 @@ class SignInViewController: UIViewController {
     
     private func setupLoginLabel() {
         loginLabel.topAnchor.constraint(equalTo: logoView.bottomAnchor, constant: 60).isActive = true
-        loginLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        loginLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        loginLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        loginLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         loginLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         loginLabel.font = UIFont.systemFont(ofSize: 15)
@@ -111,8 +119,8 @@ class SignInViewController: UIViewController {
     
     private func setupLoginField() {
         loginTextField.topAnchor.constraint(equalTo: loginLabel.bottomAnchor, constant: 0).isActive = true
-        loginTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        loginTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        loginTextField.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        loginTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         loginTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         loginTextField.backgroundColor = .clear
@@ -125,8 +133,8 @@ class SignInViewController: UIViewController {
     
     private func setupLineLog() {
         logLineView.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 0).isActive = true
-        logLineView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        logLineView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        logLineView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        logLineView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         logLineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         logLineView.alpha = 12/100
         
@@ -135,8 +143,8 @@ class SignInViewController: UIViewController {
     
     private func setupPasswordLabel() {
         passwordLabel.topAnchor.constraint(equalTo: loginTextField.bottomAnchor, constant: 5).isActive = true
-        passwordLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        passwordLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        passwordLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        passwordLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         passwordLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         passwordLabel.font = UIFont.systemFont(ofSize: 15)
@@ -146,8 +154,8 @@ class SignInViewController: UIViewController {
     
     private func setupPasswordField() {
         passwordTextField.topAnchor.constraint(equalTo: passwordLabel.bottomAnchor, constant: 0).isActive = true
-        passwordTextField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        passwordTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        passwordTextField.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        passwordTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         passwordTextField.backgroundColor = .clear
@@ -170,48 +178,33 @@ class SignInViewController: UIViewController {
     
     private func setupLinePas() {
         pasLineView.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 0).isActive = true
-        pasLineView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        pasLineView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        pasLineView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        pasLineView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         pasLineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         pasLineView.alpha = 12/100
         
         pasLineView.backgroundColor = CustomColor.shared.grayText
     }
     
-    private func setupShadowLogView() {
-        shadowLogView.topAnchor.constraint(equalTo: pasLineView.bottomAnchor, constant: 52).isActive = true
-        shadowLogView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 42).isActive = true
-        shadowLogView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -42).isActive = true
-        shadowLogView.heightAnchor.constraint(equalToConstant: 57).isActive = true
-        
-        
-        shadowLogView.backgroundColor = CustomColor.shared.greenButton
-        shadowLogView.layer.shadowColor = CustomColor.shared.greenButton.cgColor
-        shadowLogView.layer.shadowOpacity = 3
-        shadowLogView.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
-        shadowLogView.layer.shadowRadius = 4
-        
-        shadowLogView.clipsToBounds = false
-    }
-    
     private func setupLogInButton() {
         logInButton.topAnchor.constraint(equalTo: pasLineView.bottomAnchor, constant: 50).isActive = true
-        logInButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        logInButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        logInButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        logInButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         logInButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
-        logInButton.backgroundColor = CustomColor.shared.greenButton
         logInButton.setTitle("ВОЙТИ", for: .normal)
-        logInButton.setTitleColor(.white, for: .normal)
-        logInButton.layer.cornerRadius = 5
-        logInButton.clipsToBounds = true
+        logInButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
+        logInButton.setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
+        let containerScheme = MDCContainerScheme()
+        containerScheme.colorScheme.primaryColor = CustomColor.shared.marineButton
+        logInButton.applyContainedTheme(withScheme: containerScheme)
         logInButton.addTarget(self, action: #selector(logInAction(_:)), for: .touchUpInside)
         
     }
     
     private func setupRestoreLabel() {
         restoreLabel.topAnchor.constraint(equalTo: logInButton.bottomAnchor, constant: 150).isActive = true
-        restoreLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        restoreLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         restoreLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
         restoreLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
@@ -224,53 +217,36 @@ class SignInViewController: UIViewController {
     
     private func setupFirstLine() {
         firstLineView.centerYAnchor.constraint(equalTo: restoreLabel.centerYAnchor).isActive = true
-        firstLineView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        firstLineView.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 0).isActive = true
         firstLineView.rightAnchor.constraint(equalTo: restoreLabel.leftAnchor, constant: 25).isActive = true
         firstLineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        //        firstLineView.alpha = 12/100
         
         firstLineView.backgroundColor = CustomColor.shared.grayText
     }
     
     private func setupSecondLine() {
         secondLineView.centerYAnchor.constraint(equalTo: restoreLabel.centerYAnchor).isActive = true
-        secondLineView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        secondLineView.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: 0).isActive = true
         secondLineView.leftAnchor.constraint(equalTo: restoreLabel.rightAnchor, constant: -25).isActive = true
         secondLineView.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        //        secondLineView.alpha = 12/100
         
         secondLineView.backgroundColor = CustomColor.shared.grayText
     }
     
-    private func setupShadowPasView() {
-        shadowRegView.topAnchor.constraint(equalTo: restoreLabel.bottomAnchor, constant: 22).isActive = true
-        shadowRegView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 42).isActive = true
-        shadowRegView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -42).isActive = true
-        shadowRegView.heightAnchor.constraint(equalToConstant: 57).isActive = true
-        
-        shadowRegView.backgroundColor = CustomColor.shared.blueButton
-        shadowRegView.layer.shadowColor = CustomColor.shared.blueButton.cgColor
-        shadowRegView.layer.shadowOpacity = 3
-        shadowRegView.layer.shadowOffset = CGSize(width: 3.0, height: 3.0)
-        shadowRegView.layer.shadowRadius = 4
-        
-        shadowRegView.clipsToBounds = false
-    }
-    
     private func setupRegisterButton() {
         registerButton.topAnchor.constraint(equalTo: restoreLabel.bottomAnchor, constant: 20).isActive = true
-        registerButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        registerButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        registerButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        registerButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         registerButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
-        registerButton.backgroundColor = CustomColor.shared.blueButton
         registerButton.setTitle("ЗАРЕГИСТРИРОВАТЬСЯ", for: .normal)
-        registerButton.setTitleColor(.white, for: .normal)
-        registerButton.layer.cornerRadius = 5
-        registerButton.clipsToBounds = true
+        registerButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
+        registerButton.setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
+        let containerScheme = MDCContainerScheme()
+        containerScheme.colorScheme.primaryColor = CustomColor.shared.blueButton
+        registerButton.applyContainedTheme(withScheme: containerScheme)
         registerButton.addTarget(self, action: #selector(registerAction(_:)), for: .touchUpInside)
     }
-    
     
 }
 
@@ -311,7 +287,14 @@ extension SignInViewController {
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
         navigationController?.view.backgroundColor = UIColor.clear
+        
         print("Oy press me register")
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        scrollView.contentSize.height = registerButton.frame.maxY + 5
     }
     
 }
