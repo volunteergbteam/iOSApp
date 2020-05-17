@@ -47,21 +47,10 @@ class RegisterViewController: UIViewController {
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         
         scrollView.isScrollEnabled = true
-        
-        keyboardSetting()
+    
         addSubviewElements()
         setupElements()
         setupAllSetting()
-    }
-    
-    private func keyboardSetting() {
-        let hideAction = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
-        view.addGestureRecognizer(hideAction)
-        reloadInputViews()
-    }
-    
-    @objc func hideKeyBoard() {
-        view.endEditing(true)
     }
     
     private func setupAllSetting() {
@@ -151,6 +140,7 @@ class RegisterViewController: UIViewController {
         logTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         logTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
+        logTextField.inputAccessoryView = getToolBar()
         logTextField.backgroundColor = .clear
         logTextField.textColor = .darkGray
         logTextField.tintColor = .darkGray
@@ -186,6 +176,7 @@ class RegisterViewController: UIViewController {
         numTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         numTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
+        numTextField.inputAccessoryView = getToolBar()
         numTextField.backgroundColor = .clear
         numTextField.textColor = .darkGray
         numTextField.tintColor = .darkGray
@@ -221,6 +212,7 @@ class RegisterViewController: UIViewController {
         pasTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         pasTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
+        pasTextField.inputAccessoryView = getToolBar()
         pasTextField.backgroundColor = .clear
         pasTextField.textColor = .darkGray
         pasTextField.tintColor = .darkGray
@@ -256,6 +248,7 @@ class RegisterViewController: UIViewController {
         repPasTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         repPasTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
+        repPasTextField.inputAccessoryView = getToolBar()
         repPasTextField.backgroundColor = .clear
         repPasTextField.textColor = .darkGray
         repPasTextField.tintColor = .darkGray

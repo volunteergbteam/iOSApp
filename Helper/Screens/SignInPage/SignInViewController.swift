@@ -38,7 +38,7 @@ class SignInViewController: UIViewController {
         
         scrollView.isScrollEnabled = true
         
-        keyboardSetting()
+//        keyboardSetting()
         addSubviewElements()
         setupElements()
         
@@ -71,15 +71,15 @@ class SignInViewController: UIViewController {
         scrollView.addSubview(secondLineView)
     }
     
-    private func keyboardSetting() {
-        let hideAction = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
-        view.addGestureRecognizer(hideAction)
-        reloadInputViews()
-    }
-    
-    @objc func hideKeyBoard() {
-        view.endEditing(true)
-    }
+//    private func keyboardSetting() {
+//        let hideAction = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
+//        view.addGestureRecognizer(hideAction)
+//        reloadInputViews()
+//    }
+//
+//    @objc func hideKeyBoard() {
+//        view.endEditing(true)
+//    }
     
     private func setupElements() {
         logoView.translatesAutoresizingMaskIntoConstraints = false
@@ -124,6 +124,7 @@ class SignInViewController: UIViewController {
         loginTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         loginTextField.backgroundColor = .clear
+        loginTextField.inputAccessoryView = getToolBar()
         loginTextField.textColor = .darkGray
         loginTextField.tintColor = .darkGray
         loginTextField.font = UIFont.systemFont(ofSize: 20)
@@ -158,6 +159,7 @@ class SignInViewController: UIViewController {
         passwordTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
+        passwordTextField.inputAccessoryView = getToolBar()
         passwordTextField.backgroundColor = .clear
         passwordTextField.textColor = CustomColor.shared.grayText
         passwordTextField.tintColor = CustomColor.shared.grayText
