@@ -38,7 +38,7 @@ class SignInViewController: UIViewController {
         
         scrollView.isScrollEnabled = true
         
-        //        keyboardSetting()
+        keyboardSetting()
         addSubviewElements()
         setupElements()
         
