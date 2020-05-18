@@ -29,16 +29,18 @@ class TabViewController: UITabBarController, MDCBottomNavigationBarDelegate {
         view.backgroundColor = colorScheme.backgroundColor
         
         // Set view controllers
+        let profileVC = ProfileViewController()
         let navController = UINavigationController(rootViewController: MainPageViewController())
-        viewControllers = [navController]
+        let massangerVC = MassangerViewController()
+        viewControllers = [profileVC, navController, massangerVC]
         
         // Set tabBarItems
         let tabBarItem1 = UITabBarItem(title: "Мой профиль", image: UIImage(named: "person_img"), tag: 0)
-        let tabBarItem2 = UITabBarItem(title: "Карта", image: UIImage(named: "map_img"), tag: 0)
-        let tabBarItem3 = UITabBarItem(title: "Сообщения", image: UIImage(named: "email_img"), tag: 0)
+        let tabBarItem2 = UITabBarItem(title: "Карта", image: UIImage(named: "map_img"), tag: 1)
+        let tabBarItem3 = UITabBarItem(title: "Сообщения", image: UIImage(named: "email_img"), tag: 2)
         bottomNavBar.items = [tabBarItem1, tabBarItem2, tabBarItem3]
         bottomNavBar.selectedItem = tabBarItem2
-        
+        selectedViewController = viewControllers![1]
         view.addSubview(bottomNavBar)
         bottomNavBar.delegate = self
     }
@@ -46,7 +48,6 @@ class TabViewController: UITabBarController, MDCBottomNavigationBarDelegate {
     
     func bottomNavigationBar(_ bottomNavigationBar: MDCBottomNavigationBar, didSelect item: UITabBarItem){
         guard let fromView = selectedViewController?.view, let toView = customizableViewControllers?[item.tag].view else { return }
-        
         if fromView != toView {
             UIView.transition(from: fromView, to: toView, duration: 0.3, options: [.transitionCrossDissolve], completion: nil)
         }
