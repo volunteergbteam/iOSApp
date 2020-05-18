@@ -16,7 +16,7 @@ class RestoreViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .white
-        keyboardSetting()
+        
         setupElements()
         addSubviewElements()
         setupTitle()
@@ -24,16 +24,6 @@ class RestoreViewController: UIViewController {
         setupTextField()
         setupLine()
         setupButton()
-    }
-    
-    private func keyboardSetting() {
-        let hideAction = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
-        view.addGestureRecognizer(hideAction)
-        reloadInputViews()
-    }
-    
-    @objc func hideKeyBoard() {
-        view.endEditing(true)
     }
     
     private func setupElements() {
@@ -66,7 +56,7 @@ class RestoreViewController: UIViewController {
     }
     
     private func setupLabel() {
-        restoreLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50).isActive = true
+        restoreLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 80).isActive = true
         restoreLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
         restoreLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
         restoreLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
@@ -82,6 +72,7 @@ class RestoreViewController: UIViewController {
         restoreTextField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
         restoreTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
+        restoreTextField.inputAccessoryView = getToolBar()
         restoreTextField.backgroundColor = .clear
         restoreTextField.textColor = .darkGray
         restoreTextField.tintColor = .darkGray

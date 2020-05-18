@@ -311,10 +311,8 @@ class RegisterViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
         scrollView.contentSize.height = regButton.frame.maxY
     }
-    
 }
 
 
