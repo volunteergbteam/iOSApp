@@ -6,7 +6,6 @@ import MaterialComponents.MaterialColorScheme
 
 class RestoreViewController: UIViewController {
     
-    var titleLabel = UILabel()
     var restoreLabel = UILabel()
     var restoreTextField = UITextField()
     var restoreLineView = UIView()
@@ -15,19 +14,19 @@ class RestoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Восстановление пароля"
+        
         view.backgroundColor = .white
         
         setupElements()
         addSubviewElements()
-        setupTitle()
         setupLabel()
         setupTextField()
         setupLine()
         setupButton()
     }
-    
+
     private func setupElements() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         restoreLabel.translatesAutoresizingMaskIntoConstraints = false
         restoreTextField.translatesAutoresizingMaskIntoConstraints = false
         restoreLineView.translatesAutoresizingMaskIntoConstraints = false
@@ -35,28 +34,14 @@ class RestoreViewController: UIViewController {
     }
     
     private func addSubviewElements() {
-        view.addSubview(titleLabel)
         view.addSubview(restoreLabel)
         view.addSubview(restoreTextField)
         view.addSubview(restoreLineView)
         view.addSubview(restoreButton)
     }
     
-    private func setupTitle() {
-        titleLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 50).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        titleLabel.textAlignment = .left
-        titleLabel.text = "Восстановление пароля"
-        titleLabel.font = UIFont.systemFont(ofSize: 20)
-        titleLabel.textColor = CustomColor.shared.grayText
-        titleLabel.alpha = 87/100
-    }
-    
     private func setupLabel() {
-        restoreLabel.topAnchor.constraint(equalTo: titleLabel.topAnchor, constant: 80).isActive = true
+        restoreLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 120).isActive = true
         restoreLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
         restoreLabel.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
         restoreLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
@@ -74,11 +59,11 @@ class RestoreViewController: UIViewController {
         
         restoreTextField.inputAccessoryView = getToolBar()
         restoreTextField.backgroundColor = .clear
-        restoreTextField.textColor = .darkGray
-        restoreTextField.tintColor = .darkGray
+        restoreTextField.textColor = CustomColor.shared.grayText
+        restoreTextField.tintColor = CustomColor.shared.grayText
         restoreTextField.font = UIFont.systemFont(ofSize: 20)
         restoreTextField.textAlignment = .left
-        restoreTextField.alpha = 87/100
+        restoreTextField.alpha = 80/100
     }
     
     private func setupLine() {

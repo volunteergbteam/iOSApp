@@ -37,8 +37,7 @@ class SignInViewController: UIViewController {
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         
         scrollView.isScrollEnabled = true
-        
-//        keyboardSetting()
+    
         addSubviewElements()
         setupElements()
         
@@ -70,16 +69,6 @@ class SignInViewController: UIViewController {
         scrollView.addSubview(firstLineView)
         scrollView.addSubview(secondLineView)
     }
-    
-//    private func keyboardSetting() {
-//        let hideAction = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
-//        view.addGestureRecognizer(hideAction)
-//        reloadInputViews()
-//    }
-//
-//    @objc func hideKeyBoard() {
-//        view.endEditing(true)
-//    }
     
     private func setupElements() {
         logoView.translatesAutoresizingMaskIntoConstraints = false
@@ -125,11 +114,11 @@ class SignInViewController: UIViewController {
         
         loginTextField.backgroundColor = .clear
         loginTextField.inputAccessoryView = getToolBar()
-        loginTextField.textColor = .darkGray
-        loginTextField.tintColor = .darkGray
+        loginTextField.textColor = CustomColor.shared.grayText
+        loginTextField.tintColor = CustomColor.shared.grayText
         loginTextField.font = UIFont.systemFont(ofSize: 20)
         loginTextField.textAlignment = .left
-        loginTextField.alpha = 87/100
+        loginTextField.alpha = 80/100
     }
     
     private func setupLineLog() {
@@ -158,6 +147,7 @@ class SignInViewController: UIViewController {
         passwordTextField.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
         passwordTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         passwordTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        passwordTextField.isSecureTextEntry = true
         
         passwordTextField.inputAccessoryView = getToolBar()
         passwordTextField.backgroundColor = .clear
@@ -165,7 +155,7 @@ class SignInViewController: UIViewController {
         passwordTextField.tintColor = CustomColor.shared.grayText
         passwordTextField.font = UIFont.systemFont(ofSize: 20)
         passwordTextField.textAlignment = .left
-        passwordTextField.alpha = 87/100
+        passwordTextField.alpha = 80/100
         
         let button = UIButton()
         button.backgroundColor = .clear
@@ -268,7 +258,6 @@ extension SignInViewController {
         backButton.title = ""
         backButton.tintColor = CustomColor.shared.grayText
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        navigationController?.navigationBar.alpha = 54/100
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true
@@ -284,7 +273,6 @@ extension SignInViewController {
         backButton.title = ""
         backButton.tintColor = CustomColor.shared.grayText
         navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-        navigationController?.navigationBar.alpha = 54/100
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationController?.navigationBar.isTranslucent = true

@@ -13,7 +13,7 @@ import SideMenu
 extension UIViewController {
     
     // menu action
-    @objc func menuButtonAction(_ sender: UIBarButtonItem){
+    @objc func menuButtonAction(_ sender: UIBarButtonItem) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let menu = storyboard.instantiateViewController(withIdentifier: "left_menu") as! SideMenuNavigationController
         menu.sideMenuManager.menuFadeStatusBar = false
@@ -36,6 +36,7 @@ extension UIViewController {
 }
 
 extension UITextField {
+    
     func setIcon(_ image: UIImage){
         let iconView = UIImageView(frame: CGRect(x: 10, y: 7.5, width: 15, height: 15))
         iconView.image = image
@@ -45,3 +46,4 @@ extension UITextField {
         leftViewMode = .always
     }
 }
+

@@ -12,8 +12,6 @@ class RegisterViewController: UIViewController {
         return view
     }()
     
-    var titleLabel = UILabel()
-    
     var logLabel = UILabel()
     var logTextField = UITextField()
     var logLine = UIView()
@@ -38,6 +36,8 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        title = "Регистрация"
+        
         view.backgroundColor = .white
         self.view.addSubview(scrollView)
         
@@ -54,7 +54,6 @@ class RegisterViewController: UIViewController {
     }
     
     private func setupAllSetting() {
-        setupTitle()
         setupLogLabel()
         setupLogField()
         setupLogLine()
@@ -73,7 +72,6 @@ class RegisterViewController: UIViewController {
     }
     
     private func addSubviewElements(){
-        scrollView.addSubview(titleLabel)
         scrollView.addSubview(logLabel)
         scrollView.addSubview(logTextField)
         scrollView.addSubview(logLine)
@@ -92,7 +90,6 @@ class RegisterViewController: UIViewController {
     }
     
     private func setupElements() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         logLabel.translatesAutoresizingMaskIntoConstraints = false
         logTextField.translatesAutoresizingMaskIntoConstraints = false
         logLine.translatesAutoresizingMaskIntoConstraints = false
@@ -110,23 +107,12 @@ class RegisterViewController: UIViewController {
         regButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func setupTitle() {
-        titleLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -30).isActive = true
-        titleLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 50).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 40).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        titleLabel.textAlignment = .left
-        titleLabel.text = "Регистрация"
-        titleLabel.font = UIFont.systemFont(ofSize: 20)
-        titleLabel.textColor = CustomColor.shared.grayText
-        titleLabel.alpha = 87/100
-    }
     
     private func setupLogLabel() {
-        logLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50).isActive = true
+        logLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 135).isActive = true
         logLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
         logLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
+        logLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         logLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         logLabel.font = UIFont.systemFont(ofSize: 15)
@@ -142,11 +128,11 @@ class RegisterViewController: UIViewController {
         
         logTextField.inputAccessoryView = getToolBar()
         logTextField.backgroundColor = .clear
-        logTextField.textColor = .darkGray
-        logTextField.tintColor = .darkGray
+        logTextField.textColor = CustomColor.shared.grayText
+        logTextField.tintColor = CustomColor.shared.grayText
         logTextField.font = UIFont.systemFont(ofSize: 20)
         logTextField.textAlignment = .left
-        logTextField.alpha = 87/100
+        logTextField.alpha = 80/100
     }
     
     private func setupLogLine() {
@@ -178,17 +164,17 @@ class RegisterViewController: UIViewController {
         
         numTextField.inputAccessoryView = getToolBar()
         numTextField.backgroundColor = .clear
-        numTextField.textColor = .darkGray
-        numTextField.tintColor = .darkGray
+        numTextField.textColor = CustomColor.shared.grayText
+        numTextField.tintColor = CustomColor.shared.grayText
         numTextField.font = UIFont.systemFont(ofSize: 20)
         numTextField.textAlignment = .left
-        numTextField.alpha = 87/100
+        numTextField.alpha = 80/100
     }
     
     private func setupNumLine() {
         numLine.topAnchor.constraint(equalTo: numTextField.bottomAnchor, constant: 0).isActive = true
-        numLine.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 40).isActive = true
-        numLine.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        numLine.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
+        numLine.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         numLine.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         numLine.alpha = 12/100
         
@@ -211,14 +197,15 @@ class RegisterViewController: UIViewController {
         pasTextField.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
         pasTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         pasTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        pasTextField.isSecureTextEntry = true
         
         pasTextField.inputAccessoryView = getToolBar()
         pasTextField.backgroundColor = .clear
-        pasTextField.textColor = .darkGray
-        pasTextField.tintColor = .darkGray
+        pasTextField.textColor = CustomColor.shared.grayText
+        pasTextField.tintColor = CustomColor.shared.grayText
         pasTextField.font = UIFont.systemFont(ofSize: 20)
         pasTextField.textAlignment = .left
-        pasTextField.alpha = 87/100
+        pasTextField.alpha = 80/100
     }
     
     private func setupPasLine() {
@@ -247,14 +234,15 @@ class RegisterViewController: UIViewController {
         repPasTextField.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 40).isActive = true
         repPasTextField.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -40).isActive = true
         repPasTextField.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        repPasTextField.isSecureTextEntry = true
         
         repPasTextField.inputAccessoryView = getToolBar()
         repPasTextField.backgroundColor = .clear
-        repPasTextField.textColor = .darkGray
-        repPasTextField.tintColor = .darkGray
+        repPasTextField.textColor = CustomColor.shared.grayText
+        repPasTextField.tintColor = CustomColor.shared.grayText
         repPasTextField.font = UIFont.systemFont(ofSize: 20)
         repPasTextField.textAlignment = .left
-        repPasTextField.alpha = 87/100
+        repPasTextField.alpha = 80/100
     }
     
     private func setupRepPasLine() {
