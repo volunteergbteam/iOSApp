@@ -1,7 +1,7 @@
 
 import UIKit
 
-class MassangerViewController: UIViewController, UINavigationBarDelegate{
+class MessangerViewController: UIViewController {
 
     @IBOutlet weak var massageTableView: UITableView!
     
@@ -14,15 +14,20 @@ class MassangerViewController: UIViewController, UINavigationBarDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Сообщения"
+        
+        let writeMessageButton = UIBarButtonItem(image: UIImage(systemName: "envelope"), style: .plain, target: self, action: #selector(writeMessageButtonAction(_:)))
+        
+        self.navigationItem.rightBarButtonItem  = writeMessageButton
+        
         settingFooter()
         
-        if content.isEmpty {
+        if !content.isEmpty {
             settingLabel()
         } else {
             settingTableView()
         }
     }
-    
     
     private func settingFooter() {
         let footerView = UIView()
@@ -55,13 +60,13 @@ class MassangerViewController: UIViewController, UINavigationBarDelegate{
     }
 }
 
-extension MassangerViewController: UITableViewDelegate {
+extension MessangerViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         80
     }
 }
 
-extension MassangerViewController: UITableViewDataSource {
+extension MessangerViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         5

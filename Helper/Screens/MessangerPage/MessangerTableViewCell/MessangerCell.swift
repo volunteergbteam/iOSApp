@@ -3,9 +3,9 @@ import UIKit
 
 class MassangerCell: UITableViewCell {
     
-    static var reuseId: String = "MassageCell"
+    static var reuseId: String = "MessageCell"
     static var nib: UINib {
-        UINib(nibName: "MassangerCell", bundle: nil)
+        UINib(nibName: "MessangerCell", bundle: nil)
     }
     
     @IBOutlet weak var avatarImage: UIImageView!

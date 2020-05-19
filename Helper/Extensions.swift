@@ -19,6 +19,12 @@ extension UIViewController {
         menu.sideMenuManager.menuFadeStatusBar = false
         present(menu, animated: true, completion: nil)
     }
+    // to write message
+    
+    @objc func writeMessageButtonAction(_ sender: UIBarButtonItem) {
+        // fix me
+        print("To write a message")
+    }
     
     func getToolBar() -> UIToolbar {
         let toolBar = UIToolbar()
