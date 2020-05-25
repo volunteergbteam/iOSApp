@@ -29,10 +29,10 @@ class TabViewController: UITabBarController, MDCBottomNavigationBarDelegate {
         view.backgroundColor = colorScheme.backgroundColor
         
         // Set view controllers
-        let profileVC = ProfileViewController()
+        let profileNavController = UINavigationController(rootViewController: ProfileViewController())
         let navController = UINavigationController(rootViewController: MainPageViewController())
         let messangerNavController = UINavigationController(rootViewController: MessangerViewController())
-        viewControllers = [profileVC, navController, messangerNavController]
+        viewControllers = [profileNavController, navController, messangerNavController]
         
         // Set tabBarItems
         let tabBarItem1 = UITabBarItem(title: "Мой профиль", image: UIImage(named: "person_img"), tag: 0)
