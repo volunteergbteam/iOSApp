@@ -26,6 +26,11 @@ extension UIViewController {
         print("To write a message")
     }
     
+    @objc func settingButtonAction(_ sender: UIBarButtonItem) {
+        // fix me
+        print("To setting profile")
+    }
+    
     func getToolBar() -> UIToolbar {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()

@@ -1,141 +1,262 @@
 
 import UIKit
-
-enum CellTypes {
-    case profile
-    case mainSection(item: ProfileSectionItem)
-}
+import MaterialComponents.MaterialButtons
+import MaterialComponents.MaterialButtons_Theming
+import MaterialComponents.MaterialColorScheme
 
 class ProfileViewController: UIViewController {
     
-    @IBOutlet weak var tableView: UITableView!
+    let scrollView: UIScrollView = {
+           let view = UIScrollView()
+           view.translatesAutoresizingMaskIntoConstraints = false
+           return view
+       }()
     
-    var mainSection = [CellTypes]()
-    var models = [[CellTypes]]()
-    var titleHeader = [String]()
+    var nameLabel = UILabel()
+    var nameUser = UILabel()
+    var mailLabel = UILabel()
+    var mailUser = UILabel()
+    var cityLabel = UILabel()
+    var cityUser = UILabel()
+    var aboutLabel = UILabel()
+    var aboutUser = UILabel()
+    var actionEventButton = MDCButton()
+    var myEventButton = MDCButton()
+    var quitButton = MDCButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Мой Профиль"
-        tableView.backgroundColor = .white
+        settingNavBar()
         
-        addContent()
-        registerCell()
-        countSection()
+        self.view.addSubview(scrollView)
         
-        settingFooter()
+        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor , constant: 0).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        
+        scrollView.isScrollEnabled = true
+        
+        addSubviewElements()
+        setupElements()
+        
+        setupNameLabel()
+        setupNameUser()
+        setupMailLabel()
+        setupMailUser()
+        setupCityLabel()
+        setupCityUser()
+        setupAboutLabel()
+        setupAboutUser()
+        setupActionEvent()
+        setupMyEvent()
+        setupQuit()
     }
     
-    private func countSection() {
-        for _ in models{
-            titleHeader.append(" ")
-        }
+    private func settingNavBar() {
+        let logo = UIImage(named: "user-profile")
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
+
+        let settingButton = UIBarButtonItem(image: UIImage(named: "ic_settings"), style: .plain, target: self, action: #selector(settingButtonAction(_:)))
+        
+        self.navigationItem.rightBarButtonItem  = settingButton
     }
     
-    private func settingFooter() {
-        let footerView = UIView()
-        footerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1)
-        footerView.backgroundColor = UIColor.clear
-        tableView.tableFooterView = footerView
+    private func addSubviewElements() {
+        scrollView.addSubview(nameLabel)
+        scrollView.addSubview(nameUser)
+        scrollView.addSubview(mailLabel)
+        scrollView.addSubview(mailUser)
+        scrollView.addSubview(cityLabel)
+        scrollView.addSubview(cityUser)
+        scrollView.addSubview(aboutLabel)
+        scrollView.addSubview(aboutUser)
+        scrollView.addSubview(actionEventButton)
+        scrollView.addSubview(myEventButton)
+        scrollView.addSubview(quitButton)
     }
     
-    private func addContent() {
-        models.append([.profile])
-        mainSection.append(contentsOf: MainSectionItem.getShortListItem().map {
-            CellTypes.mainSection(item: $0 )
-        })
-        models.append(mainSection)
+    private func setupElements() {
+        nameLabel.translatesAutoresizingMaskIntoConstraints = false
+        nameUser.translatesAutoresizingMaskIntoConstraints = false
+        mailLabel.translatesAutoresizingMaskIntoConstraints = false
+        mailUser.translatesAutoresizingMaskIntoConstraints = false
+        cityLabel.translatesAutoresizingMaskIntoConstraints = false
+        cityUser.translatesAutoresizingMaskIntoConstraints = false
+        aboutLabel.translatesAutoresizingMaskIntoConstraints = false
+        aboutUser.translatesAutoresizingMaskIntoConstraints = false
+        actionEventButton.translatesAutoresizingMaskIntoConstraints = false
+        myEventButton.translatesAutoresizingMaskIntoConstraints = false
+        quitButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    private func registerCell() {
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(ProfileCell.nib, forCellReuseIdentifier: ProfileCell.reuseId)
-        tableView.register(MainCell.nib, forCellReuseIdentifier: MainCell.reuseId)
+    private func setupNameLabel() {
+        nameLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        nameLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 100).isActive = true
+        nameLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        
+        nameLabel.font = UIFont.systemFont(ofSize: 18)
+        nameLabel.textAlignment = .left
+        nameLabel.textColor = CustomColor.shared.grayText
+        nameLabel.text = "Имя"
     }
+    
+    private func setupNameUser() {
+        nameUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        nameUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        nameUser.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 1).isActive = true
+        
+        nameUser.font = UIFont.systemFont(ofSize: 20)
+        nameUser.textAlignment = .left
+        nameUser.textColor = CustomColor.shared.grayText
+        nameUser.alpha = 54/100
+        nameUser.text = "Иванов Иван"
+    }
+    
+    private func setupMailLabel() {
+        mailLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        mailLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        mailLabel.topAnchor.constraint(equalTo: nameUser.bottomAnchor, constant: 10).isActive = true
+        
+        mailLabel.font = UIFont.systemFont(ofSize: 18)
+        mailLabel.textAlignment = .left
+        mailLabel.textColor = CustomColor.shared.grayText
+        mailLabel.text = "Email"
+    }
+    
+    private func setupMailUser() {
+        mailUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        mailUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        mailUser.topAnchor.constraint(equalTo: mailLabel.bottomAnchor, constant: 1).isActive = true
+        
+        mailUser.font = UIFont.systemFont(ofSize: 20)
+        mailUser.textAlignment = .left
+        mailUser.textColor = CustomColor.shared.grayText
+        mailUser.alpha = 54/100
+        mailUser.text = "email@gmail.com"
+    }
+    
+    private func setupCityLabel() {
+        cityLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        cityLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        cityLabel.topAnchor.constraint(equalTo: mailUser.bottomAnchor, constant: 10).isActive = true
+        
+        cityLabel.font = UIFont.systemFont(ofSize: 18)
+        cityLabel.textAlignment = .left
+        cityLabel.textColor = CustomColor.shared.grayText
+        cityLabel.text = "Город"
+    }
+    
+    private func setupCityUser() {
+        cityUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        cityUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        cityUser.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 1).isActive = true
+        
+        cityUser.font = UIFont.systemFont(ofSize: 20)
+        cityUser.textAlignment = .left
+        cityUser.textColor = CustomColor.shared.grayText
+        cityUser.alpha = 54/100
+        cityUser.text = "Омск"
+    }
+    
+    private func setupAboutLabel() {
+        aboutLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        aboutLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        aboutLabel.topAnchor.constraint(equalTo: cityUser.bottomAnchor, constant: 10).isActive = true
+        
+        aboutLabel.font = UIFont.systemFont(ofSize: 18)
+        aboutLabel.textAlignment = .left
+        aboutLabel.textColor = CustomColor.shared.grayText
+        aboutLabel.text = "О себе"
+    }
+    
+    private func setupAboutUser() {
+        aboutUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        aboutUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        aboutUser.topAnchor.constraint(equalTo: aboutLabel.bottomAnchor, constant: 1).isActive = true
+    
+        
+        aboutUser.font = UIFont.systemFont(ofSize: 20)
+        aboutUser.textAlignment = .left
+        aboutUser.numberOfLines = 0
+        aboutUser.textColor = CustomColor.shared.grayText
+        aboutUser.alpha = 54/100
+        aboutUser.text = "Всегда хотел помогать людям, вот и начну пожалуй с сегодня."
+    }
+    
+    private func setupActionEvent() {
+        actionEventButton.topAnchor.constraint(equalTo: aboutUser.bottomAnchor, constant: 20).isActive = true
+        actionEventButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        actionEventButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        actionEventButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        actionEventButton.setTitle("АКТИВНЫЕ МЕРОПРИЯТИЯ", for: .normal)
+        actionEventButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
+        actionEventButton.setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
+        let containerScheme = MDCContainerScheme()
+        containerScheme.colorScheme.primaryColor = CustomColor.shared.marineButton
+        actionEventButton.applyContainedTheme(withScheme: containerScheme)
+        actionEventButton.addTarget(self, action: #selector(eventAction(_:)), for: .touchUpInside)
+    }
+    
+    private func setupMyEvent() {
+        myEventButton.topAnchor.constraint(equalTo: actionEventButton.bottomAnchor, constant: 20).isActive = true
+        myEventButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        myEventButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        myEventButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        myEventButton.setTitle("МОИ МЕРОПРИЯТИЯ", for: .normal)
+        myEventButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
+        myEventButton.setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
+        let containerScheme = MDCContainerScheme()
+        containerScheme.colorScheme.primaryColor = CustomColor.shared.marineButton
+        myEventButton.applyContainedTheme(withScheme: containerScheme)
+        myEventButton.addTarget(self, action: #selector(myEventAction(_:)), for: .touchUpInside)
+    }
+    
+    private func setupQuit() {
+        quitButton.topAnchor.constraint(equalTo: myEventButton.bottomAnchor, constant: 20).isActive = true
+        quitButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        quitButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        quitButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10).isActive = true
+        quitButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        
+        quitButton.setTitle("ВЫЙТИ", for: .normal)
+        quitButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
+        quitButton.setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
+        let containerScheme = MDCContainerScheme()
+        containerScheme.colorScheme.primaryColor = .red
+        quitButton.applyContainedTheme(withScheme: containerScheme)
+        quitButton.addTarget(self, action: #selector(quitAction(_:)), for: .touchUpInside)
+    }
+
 }
 
-extension ProfileViewController: UITableViewDelegate {
+extension ProfileViewController {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-         let row = models[indexPath.section][indexPath.row]
-        
-        switch row {
-        case .profile:
-            print("TO DO, show me o_O")
-        case let .mainSection(item: section):
-            let name = section.name
-            
-            switch name {
-            case "Уведомления":
-                print("Ho ho, show me notifications")
-            case "Рейтинг":
-                print("Ho ho, show me rating")
-            case "Мои Успехи":
-                print("Ho ho, show me My success")
-            case "Лента Событий":
-                print("Ho ho, show me news feed")
-            case "О приложении":
-                print("Ho ho, show me about application")
-            default:
-                 print("OOOooopsss... it's going wrong! Fix me")
-            }
-        }
+    @objc func eventAction(_ sender: UIButton!) {
+        // fix me
+        print("Fix event show")
     }
+    
+    @objc func myEventAction(_ sender: UIButton!) {
+        // fix me
+        print("Fix my event show")
+    }
+    
+    @objc func quitAction(_ sender: UIButton!) {
+        // fix me
+        print("Fix quit action")
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        scrollView.contentSize.height = quitButton.frame.maxY - 50
+    }
+    
 }
 
-extension ProfileViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        models.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        models[section].count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        25
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return titleHeader[section]
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-         view.tintColor = UIColor.clear
-     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let row = models[indexPath.section][indexPath.row]
-        
-        switch row {
-        case .profile: return 120
-        case .mainSection: return 80
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = models[indexPath.section][indexPath.row]
-        
-        switch row {
-        case .profile:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileCell") as? ProfileCell else {
-                return UITableViewCell()
-            }
-            cell.profileImageView.image = UIImage(named: "person_img")
-            cell.fullNameLabel.text = "Максим Губернатов"
-            cell.ageLabel.text = "29 лет"
-            cell.cityLabel.text = "Москва"
-            return cell
-        case let .mainSection(item: section):
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainCell") as? MainCell else {
-                return UITableViewCell()
-            }
-            cell.renderCell(model: section)
-            return cell
-        }
-    }
-}
