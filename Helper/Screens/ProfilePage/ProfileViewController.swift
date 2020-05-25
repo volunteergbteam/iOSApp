@@ -55,13 +55,11 @@ class ProfileViewController: UIViewController {
     }
     
     private func settingNavBar() {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        imageView.contentMode = .scaleAspectFit
         let logo = UIImage(named: "user-profile")
-        let imageView = UIImageView(image:logo)
+        imageView.image = logo
         self.navigationItem.titleView = imageView
-
-        let settingButton = UIBarButtonItem(image: UIImage(named: "ic_settings"), style: .plain, target: self, action: #selector(settingButtonAction(_:)))
-        
-        self.navigationItem.rightBarButtonItem  = settingButton
     }
     
     private func addSubviewElements() {
@@ -93,8 +91,8 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupNameLabel() {
-        nameLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
-        nameLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        nameLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        nameLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
         nameLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 100).isActive = true
         nameLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
@@ -105,8 +103,8 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupNameUser() {
-        nameUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
-        nameUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        nameUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        nameUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
         nameUser.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 1).isActive = true
         
         nameUser.font = UIFont.systemFont(ofSize: 20)
@@ -117,9 +115,9 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupMailLabel() {
-        mailLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
-        mailLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
-        mailLabel.topAnchor.constraint(equalTo: nameUser.bottomAnchor, constant: 10).isActive = true
+        mailLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        mailLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        mailLabel.topAnchor.constraint(equalTo: nameUser.bottomAnchor, constant: 20).isActive = true
         
         mailLabel.font = UIFont.systemFont(ofSize: 18)
         mailLabel.textAlignment = .left
@@ -128,8 +126,8 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupMailUser() {
-        mailUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
-        mailUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        mailUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        mailUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
         mailUser.topAnchor.constraint(equalTo: mailLabel.bottomAnchor, constant: 1).isActive = true
         
         mailUser.font = UIFont.systemFont(ofSize: 20)
@@ -140,9 +138,9 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupCityLabel() {
-        cityLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
-        cityLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
-        cityLabel.topAnchor.constraint(equalTo: mailUser.bottomAnchor, constant: 10).isActive = true
+        cityLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        cityLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        cityLabel.topAnchor.constraint(equalTo: mailUser.bottomAnchor, constant: 20).isActive = true
         
         cityLabel.font = UIFont.systemFont(ofSize: 18)
         cityLabel.textAlignment = .left
@@ -151,8 +149,8 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupCityUser() {
-        cityUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
-        cityUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        cityUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        cityUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
         cityUser.topAnchor.constraint(equalTo: cityLabel.bottomAnchor, constant: 1).isActive = true
         
         cityUser.font = UIFont.systemFont(ofSize: 20)
@@ -163,9 +161,9 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupAboutLabel() {
-        aboutLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
-        aboutLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
-        aboutLabel.topAnchor.constraint(equalTo: cityUser.bottomAnchor, constant: 10).isActive = true
+        aboutLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        aboutLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        aboutLabel.topAnchor.constraint(equalTo: cityUser.bottomAnchor, constant: 20).isActive = true
         
         aboutLabel.font = UIFont.systemFont(ofSize: 18)
         aboutLabel.textAlignment = .left
@@ -174,8 +172,8 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupAboutUser() {
-        aboutUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
-        aboutUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
+        aboutUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        aboutUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
         aboutUser.topAnchor.constraint(equalTo: aboutLabel.bottomAnchor, constant: 1).isActive = true
     
         
@@ -188,9 +186,9 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupActionEvent() {
-        actionEventButton.topAnchor.constraint(equalTo: aboutUser.bottomAnchor, constant: 20).isActive = true
-        actionEventButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
-        actionEventButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        actionEventButton.topAnchor.constraint(equalTo: aboutUser.bottomAnchor, constant: 50).isActive = true
+        actionEventButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        actionEventButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
         actionEventButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         actionEventButton.setTitle("АКТИВНЫЕ МЕРОПРИЯТИЯ", for: .normal)
@@ -203,9 +201,9 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupMyEvent() {
-        myEventButton.topAnchor.constraint(equalTo: actionEventButton.bottomAnchor, constant: 20).isActive = true
-        myEventButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
-        myEventButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        myEventButton.topAnchor.constraint(equalTo: actionEventButton.bottomAnchor, constant: 10).isActive = true
+        myEventButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        myEventButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
         myEventButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         myEventButton.setTitle("МОИ МЕРОПРИЯТИЯ", for: .normal)
@@ -218,19 +216,19 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupQuit() {
-        quitButton.topAnchor.constraint(equalTo: myEventButton.bottomAnchor, constant: 20).isActive = true
-        quitButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 10).isActive = true
-        quitButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -10).isActive = true
+        quitButton.topAnchor.constraint(equalTo: myEventButton.bottomAnchor, constant: 10).isActive = true
+        quitButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        quitButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
         quitButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10).isActive = true
         quitButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
-        quitButton.setTitle("ВЫЙТИ", for: .normal)
+        quitButton.setTitle("НАСТРОЙКИ", for: .normal)
         quitButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
         quitButton.setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
         let containerScheme = MDCContainerScheme()
-        containerScheme.colorScheme.primaryColor = .red
+        containerScheme.colorScheme.primaryColor = CustomColor.shared.blueButton
         quitButton.applyContainedTheme(withScheme: containerScheme)
-        quitButton.addTarget(self, action: #selector(quitAction(_:)), for: .touchUpInside)
+        quitButton.addTarget(self, action: #selector(settingButtonAction(_:)), for: .touchUpInside)
     }
 
 }
@@ -238,18 +236,17 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController {
     
     @objc func eventAction(_ sender: UIButton!) {
-        // fix me
-        print("Fix event show")
+        let ActionViewController = ActionEventViewController()
+        navigationController?.pushViewController(ActionViewController, animated: true)
+        let backButton = UIBarButtonItem()
+        backButton.title = ""
+        backButton.tintColor = CustomColor.shared.grayText
+        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
     }
     
     @objc func myEventAction(_ sender: UIButton!) {
         // fix me
         print("Fix my event show")
-    }
-    
-    @objc func quitAction(_ sender: UIButton!) {
-        // fix me
-        print("Fix quit action")
     }
     
     override func viewDidLayoutSubviews() {
