@@ -22,7 +22,7 @@ class MessangerViewController: UIViewController {
         
         settingFooter()
         
-        if !content.isEmpty {
+        if content.isEmpty {
             settingLabel()
         } else {
             settingTableView()
@@ -39,7 +39,7 @@ class MessangerViewController: UIViewController {
     private func settingTableView() {
         massageTableView.delegate = self
         massageTableView.dataSource = self
-        massageTableView.register(MassangerCell.nib, forCellReuseIdentifier: MassangerCell.reuseId)
+        massageTableView.register(MessangerCell.nib, forCellReuseIdentifier: MessangerCell.reuseId)
     }
     
     private func settingLabel() {
@@ -73,7 +73,7 @@ extension MessangerViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = massageTableView.dequeueReusableCell(withIdentifier: MassangerCell.reuseId , for: indexPath) as? MassangerCell else { return UITableViewCell() }
+        guard let cell = massageTableView.dequeueReusableCell(withIdentifier: MessangerCell.reuseId , for: indexPath) as? MessangerCell else { return UITableViewCell() }
         cell.renderCell()
         return cell
     }

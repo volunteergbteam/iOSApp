@@ -1,7 +1,7 @@
 
 import UIKit
 
-class MassangerCell: UITableViewCell {
+class MessangerCell: UITableViewCell {
     
     static var reuseId: String = "MessageCell"
     static var nib: UINib {
@@ -12,6 +12,7 @@ class MassangerCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var textMassageLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    
     
     override func prepareForReuse() {
         super.prepareForReuse()
