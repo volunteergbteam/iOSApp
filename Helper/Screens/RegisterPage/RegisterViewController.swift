@@ -3,6 +3,8 @@ import UIKit
 import MaterialComponents.MaterialButtons
 import MaterialComponents.MaterialButtons_Theming
 import MaterialComponents.MaterialColorScheme
+import FirebaseAuth
+import SwiftKeychainWrapper
 
 class RegisterViewController: UIViewController {
     
@@ -266,7 +268,7 @@ class RegisterViewController: UIViewController {
         checkmarkButton.layer.borderColor = CustomColor.shared.blueText.cgColor
         checkmarkButton.layer.cornerRadius = 5
         checkmarkButton.isSelected = false
-        checkmarkButton.addTarget(self, action: #selector(checkmarkAction(_:)), for: .touchUpInside)
+        checkmarkButton.addTarget(self, action: #selector(checkmarkAction), for: .touchUpInside)
     }
     
     private func setupCheckLabel() {
@@ -294,7 +296,7 @@ class RegisterViewController: UIViewController {
         containerScheme.colorScheme.primaryColor = CustomColor.shared.marineButton
         regButton.applyContainedTheme(withScheme: containerScheme)
         
-        regButton.addTarget(self, action: #selector(registerAction(_:)), for: .touchUpInside)
+        regButton.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
     }
     
     override func viewDidLayoutSubviews() {
@@ -306,11 +308,52 @@ class RegisterViewController: UIViewController {
 
 extension RegisterViewController {
     
-    @objc func registerAction(_ sender: UIButton!) {
-        print("Account completion register. Please, return on main view and sign in app")
+    @objc func registerAction(_ sender: UIButton) {
+        // check if all fields are filled
+        guard let email = logTextField.text, logTextField.text?.count ?? 0 > 0,
+            let phone = numTextField.text, numTextField.text?.count ?? 0 > 0,
+            let password = pasTextField.text, pasTextField.text?.count ?? 0 > 0,
+            let repeatPassword = repPasTextField.text, repPasTextField.text?.count ?? 0 > 0 else {
+                showBasicAlert(title: "Вы заполнели не все поля", message: "")
+                return
+        }
+        
+        // check if password match
+        guard repeatPassword == password else {
+            showBasicAlert(title: "Пароли не совпадают", message: "")
+            return
+        }
+        
+        guard checkmarkButton.isSelected else {
+            showBasicAlert(title: "Необходимо согласиться с политикой конфиденциальности", message: "")
+            return
+        }
+        
+        // registration action
+        runActivityIndicator()
+        Auth.auth().createUser(withEmail: email, password: password) {[weak self] authResult, error in
+            // check for error
+            if let error = error {
+                self?.stopActivityIndicator()
+                self?.showBasicAlert(title: "Ошибка", message: error.localizedDescription)
+            } else {
+                // success
+                print("YA MAN")
+                //TODO: add info to database
+                
+                // save uid to key chain and move to main screen
+                if let user = authResult?.user {
+                    self?.stopActivityIndicator()
+                    KeychainWrapper.standard.set(user.uid, forKey: "UID")
+                    let navController = UINavigationController(rootViewController: MainPageViewController())
+                    navController.modalPresentationStyle = .fullScreen
+                    self?.present(navController, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
-    @objc func checkmarkAction(_ sender: UIButton!) {
+    @objc func checkmarkAction(_ sender: UIButton) {
         if sender.isSelected != true {
             checkmarkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
             checkmarkButton.backgroundColor = CustomColor.shared.blueText
