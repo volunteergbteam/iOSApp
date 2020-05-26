@@ -2,7 +2,8 @@ import UIKit
 import MaterialComponents.MaterialButtons
 import MaterialComponents.MaterialButtons_Theming
 import MaterialComponents.MaterialColorScheme
-
+import FirebaseAuth
+import SwiftKeychainWrapper
 class SignInViewController: UIViewController {
     
     let scrollView: UIScrollView = {
@@ -162,7 +163,7 @@ class SignInViewController: UIViewController {
         button.alpha = 54/100
         button.setTitle("не помню", for: .normal)
         button.setTitleColor(CustomColor.shared.grayText, for: .normal)
-        button.addTarget(self, action: #selector(restoreAction(_:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(restoreAction), for: .touchUpInside)
         passwordTextField.rightView = button
         passwordTextField.rightViewMode = .always
         
@@ -190,7 +191,7 @@ class SignInViewController: UIViewController {
         let containerScheme = MDCContainerScheme()
         containerScheme.colorScheme.primaryColor = CustomColor.shared.marineButton
         logInButton.applyContainedTheme(withScheme: containerScheme)
-        logInButton.addTarget(self, action: #selector(logInAction(_:)), for: .touchUpInside)
+        logInButton.addTarget(self, action: #selector(logInAction), for: .touchUpInside)
         
     }
     
@@ -237,21 +238,42 @@ class SignInViewController: UIViewController {
         let containerScheme = MDCContainerScheme()
         containerScheme.colorScheme.primaryColor = CustomColor.shared.blueButton
         registerButton.applyContainedTheme(withScheme: containerScheme)
-        registerButton.addTarget(self, action: #selector(registerAction(_:)), for: .touchUpInside)
+        registerButton.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
     }
     
 }
 
 extension SignInViewController {
     
-    @objc func logInAction(_ sender: UIButton!) {
-        // fix me
-        let mainPage = TabViewController()
-        mainPage.modalPresentationStyle = .fullScreen
-        self.navigationController?.present(mainPage, animated: true, completion: nil)
+    @objc func logInAction(_ sender: UIButton) {
+        // check text fileds
+        guard let email = loginTextField.text, loginTextField.text?.count ?? 0 > 0,
+            let password = passwordTextField.text, passwordTextField.text?.count ?? 0 > 0 else { return }
+        
+        // auth
+        runActivityIndicator()
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+          // guard let strongSelf = self else { return }
+            if let error = error {
+                // check error
+                self?.stopActivityIndicator()
+                self?.showBasicAlert(title: "Ошибка", message: error.localizedDescription)
+            } else {
+                // success
+                if let user = authResult?.user {
+                    self?.stopActivityIndicator()
+                    KeychainWrapper.standard.set(user.uid, forKey: "UID")
+                    let mainPage = TabViewController()
+                    mainPage.modalPresentationStyle = .fullScreen
+                    self?.navigationController?.present(mainPage, animated: true, completion: nil)
+                } else {
+                    // soemthing is wrong, do something
+                }
+            }
+        }
     }
     
-    @objc func restoreAction(_ sender: UIButton!) {
+    @objc func restoreAction(_ sender: UIButton) {
         let restoreViewController = RestoreViewController()
         navigationController?.pushViewController(restoreViewController, animated: true)
         let backButton = UIBarButtonItem()
@@ -266,7 +288,7 @@ extension SignInViewController {
         print("Oyy press me restore")
     }
     
-    @objc func registerAction(_ sender: UIButton!) {
+    @objc func registerAction(_ sender: UIButton) {
         let registerViewController = RegisterViewController()
         navigationController?.pushViewController(registerViewController, animated: true)
         let backButton = UIBarButtonItem()

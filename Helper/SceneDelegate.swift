@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -20,11 +21,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        let navigationView = SignInNavigationController()
-        let signInView = SignInViewController()
-        navigationView.viewControllers = [signInView]
-        window?.rootViewController = navigationView
-        window?.makeKeyAndVisible()
+        // check for auth
+        if KeychainWrapper.standard.hasValue(forKey: "UID") {
+            window?.rootViewController = TabViewController()
+            window?.makeKeyAndVisible()
+        } else {
+            let navigationView = SignInNavigationController()
+            let signInView = SignInViewController()
+            navigationView.viewControllers = [signInView]
+            window?.rootViewController = navigationView
+            window?.makeKeyAndVisible()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

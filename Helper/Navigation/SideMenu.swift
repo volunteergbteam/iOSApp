@@ -9,6 +9,7 @@
 import Foundation
 import SideMenu
 import MaterialComponents.MaterialDialogs
+import SwiftKeychainWrapper
 
 class MenuVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -91,8 +92,12 @@ class MenuVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let alertController = MDCAlertController(title: "Подтвердите выход", message: "")
         let action = MDCAlertAction(title:"Выйти", emphasis: .high) {
             (action) in
-            // TODO: logout action here
-            print("LOGOUT")
+            KeychainWrapper.standard.removeObject(forKey: "UID")
+            let navigationView = SignInNavigationController()
+            let signInView = SignInViewController()
+            navigationView.viewControllers = [signInView]
+            navigationView.modalPresentationStyle = .fullScreen
+            self.navigationController?.present(navigationView, animated: true, completion: nil)
         }
         
         let cancel = MDCAlertAction(title:"Отмена", emphasis: .low){
