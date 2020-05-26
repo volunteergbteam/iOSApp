@@ -236,8 +236,8 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController {
     
     @objc func eventAction(_ sender: UIButton!) {
-        let ActionViewController = ActionEventViewController()
-        navigationController?.pushViewController(ActionViewController, animated: true)
+        //let ActionViewController = ActionEventViewController()
+        navigationController?.pushViewController(ActiveEventsCollectionVC(), animated: true)
         let backButton = UIBarButtonItem()
         backButton.title = ""
         backButton.tintColor = CustomColor.shared.grayText

@@ -24,12 +24,12 @@ class CustomGreenButton: MDCButton {
     }
     
     private func setupDefault() {
-        setTitle("ОТМЕТИТЬ ВЫПОЛНЕННЫМ", for: .normal)
-        setElevation(ShadowElevation(rawValue: 6), for: .normal)
-        setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
-        let containerScheme = MDCContainerScheme()
-        containerScheme.colorScheme.primaryColor = CustomColor.shared.marineButton
-        applyContainedTheme(withScheme: containerScheme)
+//        setTitle("ОТМЕТИТЬ ВЫПОЛНЕННЫМ", for: .normal)
+//        setElevation(ShadowElevation(rawValue: 6), for: .normal)
+//        setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
+//        let containerScheme = MDCContainerScheme()
+//        containerScheme.colorScheme.primaryColor = CustomColor.shared.marineButton
+//        applyContainedTheme(withScheme: containerScheme)
     }
     
 }
@@ -47,12 +47,12 @@ class CustomRedButton: MDCButton {
     }
     
     private func setupDefault() {
-        setTitle("ОТМЕНИТЬ", for: .normal)
-        setElevation(ShadowElevation(rawValue: 6), for: .normal)
-        setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
-        let containerScheme = MDCContainerScheme()
-        containerScheme.colorScheme.primaryColor = .red
-        applyContainedTheme(withScheme: containerScheme)
+//        setTitle("ОТМЕНИТЬ", for: .normal)
+//        setElevation(ShadowElevation(rawValue: 6), for: .normal)
+//        setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
+//        let containerScheme = MDCContainerScheme()
+//        containerScheme.colorScheme.primaryColor = .red
+//        applyContainedTheme(withScheme: containerScheme)
     }
     
 }

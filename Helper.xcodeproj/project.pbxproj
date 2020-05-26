@@ -37,6 +37,10 @@
 		A8B2C9C8247D7B4D0077A9C2 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B2C9B1247D7B4D0077A9C2 /* NotificationNames.swift */; };
 		A8B2C9C9247D7B4D0077A9C2 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B2C9B2247D7B4D0077A9C2 /* CustomButton.swift */; };
 		A8B2C9CB247D88730077A9C2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A8B2C9CA247D88730077A9C2 /* GoogleService-Info.plist */; };
+		A8B2C9D2247DB7AC0077A9C2 /* ActiveEventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B2C9D0247DB7AC0077A9C2 /* ActiveEventCollectionViewCell.swift */; };
+		A8B2C9D3247DB7AC0077A9C2 /* ActiveEventCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B2C9D1247DB7AC0077A9C2 /* ActiveEventCollectionViewCell.xib */; };
+		A8B2C9DC247DBF6F0077A9C2 /* ActiveEventsCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B2C9DA247DBF6F0077A9C2 /* ActiveEventsCollectionVC.swift */; };
+		A8B2C9DD247DBF6F0077A9C2 /* ActiveEventsCollectionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8B2C9DB247DBF6F0077A9C2 /* ActiveEventsCollectionVC.xib */; };
 		A8F5EAD5247C027300338013 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F5EAD4247C027300338013 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
@@ -74,6 +78,10 @@
 		A8B2C9B1247D7B4D0077A9C2 /* NotificationNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		A8B2C9B2247D7B4D0077A9C2 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		A8B2C9CA247D88730077A9C2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A8B2C9D0247DB7AC0077A9C2 /* ActiveEventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEventCollectionViewCell.swift; sourceTree = "<group>"; };
+		A8B2C9D1247DB7AC0077A9C2 /* ActiveEventCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveEventCollectionViewCell.xib; sourceTree = "<group>"; };
+		A8B2C9DA247DBF6F0077A9C2 /* ActiveEventsCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveEventsCollectionVC.swift; sourceTree = "<group>"; };
+		A8B2C9DB247DBF6F0077A9C2 /* ActiveEventsCollectionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActiveEventsCollectionVC.xib; sourceTree = "<group>"; };
 		A8F5EAD4247C027300338013 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EC33E28AF437591A0F23155C /* Pods-Helper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Helper.release.xcconfig"; path = "Target Support Files/Pods-Helper/Pods-Helper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -227,6 +235,8 @@
 				A8B2C9A8247D7B4D0077A9C2 /* ActionEventTableViewCell */,
 				A8B2C9AB247D7B4D0077A9C2 /* ActionEventViewController.swift */,
 				A8B2C9AC247D7B4D0077A9C2 /* ActionEventViewController.xib */,
+				A8B2C9D9247DBDFD0077A9C2 /* CollectionView */,
+				A8B2C9D4247DBB300077A9C2 /* CollctionViewCell */,
 			);
 			path = ActionEventPage;
 			sourceTree = "<group>";
@@ -248,6 +258,24 @@
 				A8B2C9B2247D7B4D0077A9C2 /* CustomButton.swift */,
 			);
 			path = Custom;
+			sourceTree = "<group>";
+		};
+		A8B2C9D4247DBB300077A9C2 /* CollctionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				A8B2C9D0247DB7AC0077A9C2 /* ActiveEventCollectionViewCell.swift */,
+				A8B2C9D1247DB7AC0077A9C2 /* ActiveEventCollectionViewCell.xib */,
+			);
+			path = CollctionViewCell;
+			sourceTree = "<group>";
+		};
+		A8B2C9D9247DBDFD0077A9C2 /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				A8B2C9DA247DBF6F0077A9C2 /* ActiveEventsCollectionVC.swift */,
+				A8B2C9DB247DBF6F0077A9C2 /* ActiveEventsCollectionVC.xib */,
+			);
+			path = CollectionView;
 			sourceTree = "<group>";
 		};
 		CDFDE3788188BC586BC33B7A /* Pods */ = {
@@ -330,12 +358,14 @@
 				A8B2C9CB247D88730077A9C2 /* GoogleService-Info.plist in Resources */,
 				A8B2C9C5247D7B4D0077A9C2 /* ProfileViewController.xib in Resources */,
 				A8B2C9C2247D7B4D0077A9C2 /* ActionEventCell.xib in Resources */,
+				A8B2C9DD247DBF6F0077A9C2 /* ActiveEventsCollectionVC.xib in Resources */,
 				A8B2C9B8247D7B4D0077A9C2 /* MessangerViewController.xib in Resources */,
 				A86185F6246C258200B5300B /* LaunchScreen.storyboard in Resources */,
 				A8B2C9BA247D7B4D0077A9C2 /* MessangerCell.xib in Resources */,
 				A86185F3246C258200B5300B /* Assets.xcassets in Resources */,
 				A8B2C9C4247D7B4D0077A9C2 /* ActionEventViewController.xib in Resources */,
 				A8B2C9BB247D7B4D0077A9C2 /* MainPageViewController.xib in Resources */,
+				A8B2C9D3247DB7AC0077A9C2 /* ActiveEventCollectionViewCell.xib in Resources */,
 				A86185F1246C258100B5300B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,12 +422,14 @@
 				A8B2C9C1247D7B4D0077A9C2 /* ActionEventCell.swift in Sources */,
 				A8B2C9BD247D7B4D0077A9C2 /* SignInNavigationController.swift in Sources */,
 				A8B2C9C7247D7B4D0077A9C2 /* CustomColor.swift in Sources */,
+				A8B2C9DC247DBF6F0077A9C2 /* ActiveEventsCollectionVC.swift in Sources */,
 				A8B2C9BC247D7B4D0077A9C2 /* MainPageViewController.swift in Sources */,
 				A8B2C9C9247D7B4D0077A9C2 /* CustomButton.swift in Sources */,
 				A8F5EAD5247C027300338013 /* Extensions.swift in Sources */,
 				A86185EA246C258100B5300B /* AppDelegate.swift in Sources */,
 				A8B2C9B6247D7B4D0077A9C2 /* RegisterViewController.swift in Sources */,
 				A8B2C9C0247D7B4D0077A9C2 /* MyEventViewController.swift in Sources */,
+				A8B2C9D2247DB7AC0077A9C2 /* ActiveEventCollectionViewCell.swift in Sources */,
 				A8B2C9C6247D7B4D0077A9C2 /* ProfileViewController.swift in Sources */,
 				A8B2C9C8247D7B4D0077A9C2 /* NotificationNames.swift in Sources */,
 				A86185EC246C258100B5300B /* SceneDelegate.swift in Sources */,
