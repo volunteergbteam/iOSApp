@@ -24,7 +24,7 @@ class CustomGreenButton: MDCButton {
     }
     
     private func setupDefault() {
-        setTitle("НАЧАТЬ ВЫПОЛНЯТЬ", for: .normal)
+        setTitle("ОТМЕТИТЬ ВЫПОЛНЕННЫМ", for: .normal)
         setElevation(ShadowElevation(rawValue: 6), for: .normal)
         setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
         let containerScheme = MDCContainerScheme()
