@@ -12,12 +12,19 @@ import MaterialComponents.MaterialButtons
 import MaterialComponents.MaterialButtons_Theming
 import MaterialComponents.MaterialColorScheme
 import MaterialComponents.MaterialNavigationDrawer
+import FirebaseDatabase
 
-class MainPageViewController: UIViewController {
+class MainPageViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var askForHelpButton: MDCButton!
     @IBOutlet weak var searchField: UITextField!
+    
+    var ref: DatabaseReference!
+    var userLocation = CLLocationCoordinate2D()
+    var areas: [AreaModel] = []
+    var currentArea: AreaModel!
+    var eventsArray: [Event] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +34,8 @@ class MainPageViewController: UIViewController {
         let sideMenuButton = UIBarButtonItem(image: UIImage(named: "side_menu_img"), style: .plain, target: self, action: #selector(menuButtonAction(_:)))
         self.navigationItem.leftBarButtonItem  = sideMenuButton
         
-        // setup map
-        let initialLocation = CLLocation(latitude: 21.282778, longitude: -157.829444)
-        mapView.centerToLocation(initialLocation)
+        // set view for annotation
+        mapView.register(EventView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         
         // setup button
         askForHelpButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
@@ -58,18 +64,29 @@ class MainPageViewController: UIViewController {
         searchField.layer.shadowColor = UIColor.black.cgColor
         searchField.layer.shadowOffset = CGSize(width: 1, height: 1)
         searchField.layer.shadowOpacity = 0.3
-    }
-}
+        
+        // get reauest for location
+        let locationManager = CLLocationManager()
+        locationManager.requestWhenInUseAuthorization()
 
-private extension MKMapView {
-    func centerToLocation(
-        _ location: CLLocation,
-        regionRadius: CLLocationDistance = 1000
-    ) {
-        let coordinateRegion = MKCoordinateRegion(
-            center: location.coordinate,
-            latitudinalMeters: regionRadius,
-            longitudinalMeters: regionRadius)
-        setRegion(coordinateRegion, animated: true)
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            locationManager.startUpdatingLocation()
+        }
+        
+        DispatchQueue.global().async {
+            self.readFireBaseData()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last{
+            let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+            userLocation.latitude = location.coordinate.latitude
+            userLocation.longitude = location.coordinate.longitude
+            mapView.setRegion(region, animated: true)
+        }
     }
 }
