@@ -4,10 +4,13 @@ import MaterialComponents.MaterialButtons
 import MaterialComponents.MaterialButtons_Theming
 import MaterialComponents.MaterialColorScheme
 import FirebaseAuth
-import SwiftKeychainWrapper
+import FirebaseDatabase
 
+import SwiftKeychainWrapper
 class RegisterViewController: UIViewController {
     
+    var ref: DatabaseReference!
+
     let scrollView: UIScrollView = {
         let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -332,15 +335,13 @@ extension RegisterViewController {
         // registration action
         runActivityIndicator()
         Auth.auth().createUser(withEmail: email, password: password) {[weak self] authResult, error in
+            guard let strongSelf = self else { return }
             // check for error
             if let error = error {
                 self?.stopActivityIndicator()
                 self?.showBasicAlert(title: "Ошибка", message: error.localizedDescription)
             } else {
                 // success
-                print("YA MAN")
-                //TODO: add info to database
-                
                 // save uid to key chain and move to main screen
                 if let user = authResult?.user {
                     self?.stopActivityIndicator()
@@ -348,6 +349,10 @@ extension RegisterViewController {
                     let navController = UINavigationController(rootViewController: MainPageViewController())
                     navController.modalPresentationStyle = .fullScreen
                     self?.present(navController, animated: true, completion: nil)
+                    
+                    // write data to BD
+                    self?.ref = Database.database().reference()
+                    strongSelf.ref.child("users").child(user.uid).setValue(["email": email, "phone": phone])
                 }
             }
         }
