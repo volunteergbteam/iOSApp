@@ -67,8 +67,6 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate {
         
         // get reauest for location
         let locationManager = CLLocationManager()
-        locationManager.requestWhenInUseAuthorization()
-
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
@@ -86,7 +84,7 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate {
             let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
             userLocation.latitude = location.coordinate.latitude
             userLocation.longitude = location.coordinate.longitude
-            mapView.setRegion(region, animated: true)
+            //mapView.setRegion(region, animated: true)
         }
     }
 }
