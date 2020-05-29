@@ -32,7 +32,7 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate {
         
         // set menu bootton on nav controller
         let sideMenuButton = UIBarButtonItem(image: UIImage(named: "side_menu_img"), style: .plain, target: self, action: #selector(menuButtonAction(_:)))
-        self.navigationItem.leftBarButtonItem  = sideMenuButton
+        self.navigationItem.leftBarButtonItem = sideMenuButton
         
         // set view for annotation
         mapView.register(EventView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)

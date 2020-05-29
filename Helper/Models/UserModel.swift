@@ -13,6 +13,5 @@ struct User {
     var lastName: String
     var email: String
     var phone: String
-    var city: String
     var about: String
 }

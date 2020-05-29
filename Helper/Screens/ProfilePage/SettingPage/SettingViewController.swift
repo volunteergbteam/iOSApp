@@ -1,3 +1,10 @@
+//
+//  SettingViewController.swift
+//  Helper
+//
+//  Created by Евгений Шварцкопф on 29.05.2020.
+//  Copyright © 2020 vTeam. All rights reserved.
+//
 
 import UIKit
 import MaterialComponents.MaterialButtons
@@ -6,7 +13,7 @@ import MaterialComponents.MaterialColorScheme
 import FirebaseDatabase
 import FirebaseAuth
 
-class ProfileViewController: UIViewController {
+class SettingViewController: UIViewController {
     
     let scrollView: UIScrollView = {
         let view = UIScrollView()
@@ -18,25 +25,21 @@ class ProfileViewController: UIViewController {
     var user: User!
     
     var nameLabel = UILabel()
-    var nameUser = UILabel()
+    var nameUser = UITextField()
     var lastNameLabel = UILabel()
     var lastNameUser = UITextField()
     var mailLabel = UILabel()
-    var mailUser = UILabel()
+    var mailUser = UITextField()
     var phoneLabel = UILabel()
-    var phoneUser = UILabel()
+    var phoneUser = UITextField()
     var aboutLabel = UILabel()
-    var aboutUser = UILabel()
-    var actionEventButton = MDCButton()
-    var myEventButton = MDCButton()
+    var aboutUser = UITextField()
+    var forgetSettingButton = MDCButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Профиль"
-        
-        let settingButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(settingButtonAction(_:)))
-        self.navigationItem.rightBarButtonItem = settingButton
+        self.title = "Настройки"
         
         self.view.addSubview(scrollView)
         
@@ -60,38 +63,13 @@ class ProfileViewController: UIViewController {
         setupPhoneUser()
         setupAboutLabel()
         setupAboutUser()
-        setupActionEvent()
-        setupMyEvent()
+        setupForgetSetting()
         
-        getApi()
-    }
-    
-    private func getApi() {
-        runActivityIndicator()
-        let userID = Auth.auth().currentUser?.uid
-        ref = Database.database().reference()
-        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { [weak self] (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            let username = value?["name"] as? String ?? "Не указано"
-            let userLastName = value?["lastName"] as? String ?? "Не указано"
-            let userEmail = value?["email"] as? String ?? "Не указано"
-            let userPhone = value?["phone"] as? String ?? "Не указано"
-            let userAbout = value?["about"] as? String ?? "Не указано"
-            
-            self?.user = User(name: username, lastName: userLastName, email: userEmail, phone: userPhone, about: userAbout)
-            
-            self?.nameUser.text = self?.user.name
-            self?.lastNameUser.text = self?.user.lastName
-            self?.mailUser.text = self?.user.email
-            self?.phoneUser.text = self?.user.phone
-            self?.aboutUser.text = self?.user.about
-            
-            self?.stopActivityIndicator()
-        }) { (error) in
-            self.stopActivityIndicator()
-            print(error.localizedDescription)
-        }
+        nameUser.placeholder = user.name
+        lastNameUser.placeholder = user.lastName
+        mailUser.placeholder = user.email
+        phoneUser.placeholder = user.phone
+        aboutUser.placeholder = user.about
     }
     
     private func addSubviewElements() {
@@ -105,8 +83,7 @@ class ProfileViewController: UIViewController {
         scrollView.addSubview(phoneUser)
         scrollView.addSubview(aboutLabel)
         scrollView.addSubview(aboutUser)
-        scrollView.addSubview(actionEventButton)
-        scrollView.addSubview(myEventButton)
+        scrollView.addSubview(forgetSettingButton)
     }
     
     private func setupElements() {
@@ -120,8 +97,7 @@ class ProfileViewController: UIViewController {
         phoneUser.translatesAutoresizingMaskIntoConstraints = false
         aboutLabel.translatesAutoresizingMaskIntoConstraints = false
         aboutUser.translatesAutoresizingMaskIntoConstraints = false
-        actionEventButton.translatesAutoresizingMaskIntoConstraints = false
-        myEventButton.translatesAutoresizingMaskIntoConstraints = false
+        forgetSettingButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupNameLabel() {
@@ -141,6 +117,7 @@ class ProfileViewController: UIViewController {
         nameUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
         nameUser.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 1).isActive = true
         
+        nameUser.inputAccessoryView = getToolBar()
         nameUser.font = UIFont.systemFont(ofSize: 20)
         nameUser.textAlignment = .left
         nameUser.textColor = CustomColor.shared.grayText
@@ -163,6 +140,7 @@ class ProfileViewController: UIViewController {
         lastNameUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
         lastNameUser.topAnchor.constraint(equalTo: lastNameLabel.bottomAnchor, constant: 1).isActive = true
         
+        lastNameUser.inputAccessoryView = getToolBar()
         lastNameUser.font = UIFont.systemFont(ofSize: 20)
         lastNameUser.textAlignment = .left
         lastNameUser.textColor = CustomColor.shared.grayText
@@ -185,6 +163,7 @@ class ProfileViewController: UIViewController {
         mailUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
         mailUser.topAnchor.constraint(equalTo: mailLabel.bottomAnchor, constant: 1).isActive = true
         
+        mailUser.inputAccessoryView = getToolBar()
         mailUser.font = UIFont.systemFont(ofSize: 20)
         mailUser.textAlignment = .left
         mailUser.textColor = CustomColor.shared.grayText
@@ -207,6 +186,7 @@ class ProfileViewController: UIViewController {
         phoneUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
         phoneUser.topAnchor.constraint(equalTo: phoneLabel.bottomAnchor, constant: 1).isActive = true
         
+        phoneUser.inputAccessoryView = getToolBar()
         phoneUser.font = UIFont.systemFont(ofSize: 20)
         phoneUser.textAlignment = .left
         phoneUser.textColor = CustomColor.shared.grayText
@@ -229,76 +209,69 @@ class ProfileViewController: UIViewController {
         aboutUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
         aboutUser.topAnchor.constraint(equalTo: aboutLabel.bottomAnchor, constant: 1).isActive = true
         
-        
+        aboutUser.inputAccessoryView = getToolBar()
         aboutUser.font = UIFont.systemFont(ofSize: 20)
         aboutUser.textAlignment = .left
-        aboutUser.numberOfLines = 0
         aboutUser.textColor = CustomColor.shared.grayText
         aboutUser.alpha = 54/100
     }
     
-    private func setupActionEvent() {
-        actionEventButton.topAnchor.constraint(equalTo: aboutUser.bottomAnchor, constant: 50).isActive = true
-        actionEventButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
-        actionEventButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
-        actionEventButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+    private func setupForgetSetting() {
+        forgetSettingButton.topAnchor.constraint(equalTo: aboutUser.bottomAnchor, constant: 150).isActive = true
+        forgetSettingButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        forgetSettingButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        forgetSettingButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10).isActive = true
+        forgetSettingButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
-        actionEventButton.setTitle("АКТИВНЫЕ МЕРОПРИЯТИЯ", for: .normal)
-        actionEventButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
-        actionEventButton.setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
+        forgetSettingButton.setTitle("ИЗМЕНИТЬ", for: .normal)
+        forgetSettingButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
+        forgetSettingButton.setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
         let containerScheme = MDCContainerScheme()
         containerScheme.colorScheme.primaryColor = CustomColor.shared.marineButton
-        actionEventButton.applyContainedTheme(withScheme: containerScheme)
-        actionEventButton.addTarget(self, action: #selector(eventAction(_:)), for: .touchUpInside)
-    }
-    
-    private func setupMyEvent() {
-        myEventButton.topAnchor.constraint(equalTo: actionEventButton.bottomAnchor, constant: 10).isActive = true
-        myEventButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
-        myEventButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
-        myEventButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10).isActive = true
-        myEventButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
-        
-        myEventButton.setTitle("МОИ МЕРОПРИЯТИЯ", for: .normal)
-        myEventButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
-        myEventButton.setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
-        let containerScheme = MDCContainerScheme()
-        containerScheme.colorScheme.primaryColor = CustomColor.shared.marineButton
-        myEventButton.applyContainedTheme(withScheme: containerScheme)
-        myEventButton.addTarget(self, action: #selector(myEventAction(_:)), for: .touchUpInside)
+        forgetSettingButton.applyContainedTheme(withScheme: containerScheme)
+        forgetSettingButton.addTarget(self, action: #selector(settingButtonAction(_:)), for: .touchUpInside)
     }
 }
 
-extension ProfileViewController {
-    
-    @objc func eventAction(_ sender: UIButton!) {
-        navigationController?.pushViewController(ActiveEventsCollectionVC(), animated: true)
-        let backButton = UIBarButtonItem()
-        backButton.title = ""
-        backButton.tintColor = CustomColor.shared.grayText
-        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-    }
-    
-    @objc func myEventAction(_ sender: UIButton!) {
-        // fix me
-        print("Fix my event show")
-    }
+extension SettingViewController {
     
     @objc func settingButtonAction(_ sender: UIBarButtonItem) {
-        let settingVC = SettingViewController()
-        settingVC.user = user
-        self.navigationController?.pushViewController(settingVC, animated: true)
-        let backButton = UIBarButtonItem()
-        backButton.title = ""
-        backButton.tintColor = CustomColor.shared.grayText
-        navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+        self.runActivityIndicator()
+        guard let name = nameUser.text, let lastName = lastNameUser.text,
+            let phone = phoneUser.text, let email = mailUser.text,
+            let about = aboutUser.text else { return }
         
-        scrollView.contentSize.height = myEventButton.frame.maxY - 50
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        
+        if !email.isEmpty {
+            
+            let newUser = [
+                "name" : name,
+                "lastName" : lastName,
+                "email" : email,
+                "phone" : phone,
+                "about" : about
+            ]
+            let childUpdates = ["/users/\(userID)": newUser]
+            ref.updateChildValues(childUpdates)
+            self.stopActivityIndicator()
+            self.showBasicAlert(title: "Успешно", message: "Изменения сохранены")
+            
+        } else {
+            
+            let newUser = [
+                "name" : name,
+                "lastName" : lastName,
+                "phone" : phone,
+                "about" : about
+            ]
+            
+            let childUpdates = ["/users/\(userID)": newUser]
+            ref.updateChildValues(childUpdates)
+            self.stopActivityIndicator()
+            self.showBasicAlert(title: "Успешно", message: "Изменения сохранены")
+        }
     }
-    
 }
+
 
