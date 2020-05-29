@@ -99,6 +99,7 @@ extension MainPageViewController {
             print(error.localizedDescription)
         }
         
+        
         // and finally put marks on map
         _ = semaphore.wait(timeout: .distantFuture)
         for event in eventsArray {

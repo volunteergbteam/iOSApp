@@ -76,11 +76,11 @@ class SettingViewController: UIViewController {
         setupAboutLine()
         setupForgetSetting()
         
-        nameUser.placeholder = user.name
-        lastNameUser.placeholder = user.lastName
-        mailUser.placeholder = user.email
-        phoneUser.placeholder = user.phone
-        aboutUser.placeholder = user.about
+        nameUser.text = user.name
+        lastNameUser.text = user.lastName
+        mailUser.text = user.email
+        phoneUser.text = user.phone
+        aboutUser.text = user.about
     }
     
     private func addSubviewElements() {
