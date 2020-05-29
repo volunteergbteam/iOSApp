@@ -237,13 +237,16 @@ extension SettingViewController {
     
     @objc func settingButtonAction(_ sender: UIBarButtonItem) {
         self.runActivityIndicator()
+
+        ref = Database.database().reference()
+        
         guard let name = nameUser.text, let lastName = lastNameUser.text,
             let phone = phoneUser.text, let email = mailUser.text,
             let about = aboutUser.text else { return }
         
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
-        if !email.isEmpty {
+        if !email.isEmpty && !phone.isEmpty {
             
             let newUser = [
                 "name" : name,
@@ -262,7 +265,8 @@ extension SettingViewController {
             let newUser = [
                 "name" : name,
                 "lastName" : lastName,
-                "phone" : phone,
+                "email" : user.email,
+                "phone" : user.phone,
                 "about" : about
             ]
             
