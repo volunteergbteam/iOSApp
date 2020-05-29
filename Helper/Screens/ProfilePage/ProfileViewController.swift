@@ -63,6 +63,10 @@ class ProfileViewController: UIViewController {
         setupActionEvent()
         setupMyEvent()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         getApi()
     }
     

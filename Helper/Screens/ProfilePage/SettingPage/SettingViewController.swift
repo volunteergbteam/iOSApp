@@ -36,6 +36,12 @@ class SettingViewController: UIViewController {
     var aboutUser = UITextField()
     var forgetSettingButton = MDCButton()
     
+    var nameLine = UIView()
+    var lastNameLine = UIView()
+    var mailLine = UIView()
+    var phoneLine = UIView()
+    var aboutLine = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -55,14 +61,19 @@ class SettingViewController: UIViewController {
         
         setupNameLabel()
         setupNameUser()
+        setupNameLine()
         setupLastNameLabel()
         setupLastNameUser()
+        setupLastNameLine()
         setupMailLabel()
         setupMailUser()
+        setupMailLine()
         setupPhoneLabel()
         setupPhoneUser()
+        setupPhoneLine()
         setupAboutLabel()
         setupAboutUser()
+        setupAboutLine()
         setupForgetSetting()
         
         nameUser.placeholder = user.name
@@ -84,6 +95,11 @@ class SettingViewController: UIViewController {
         scrollView.addSubview(aboutLabel)
         scrollView.addSubview(aboutUser)
         scrollView.addSubview(forgetSettingButton)
+        scrollView.addSubview(nameLine)
+        scrollView.addSubview(lastNameLine)
+        scrollView.addSubview(mailLine)
+        scrollView.addSubview(phoneLine)
+        scrollView.addSubview(aboutLine)
     }
     
     private func setupElements() {
@@ -98,12 +114,17 @@ class SettingViewController: UIViewController {
         aboutLabel.translatesAutoresizingMaskIntoConstraints = false
         aboutUser.translatesAutoresizingMaskIntoConstraints = false
         forgetSettingButton.translatesAutoresizingMaskIntoConstraints = false
+        nameLine.translatesAutoresizingMaskIntoConstraints = false
+        lastNameLine.translatesAutoresizingMaskIntoConstraints = false
+        mailLine.translatesAutoresizingMaskIntoConstraints = false
+        phoneLine.translatesAutoresizingMaskIntoConstraints = false
+        aboutLine.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupNameLabel() {
         nameLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
         nameLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 100).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50).isActive = true
         nameLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
         nameLabel.font = UIFont.systemFont(ofSize: 18)
@@ -122,6 +143,16 @@ class SettingViewController: UIViewController {
         nameUser.textAlignment = .left
         nameUser.textColor = CustomColor.shared.grayText
         nameUser.alpha = 54/100
+    }
+    
+    private func setupNameLine() {
+        nameLine.topAnchor.constraint(equalTo: nameUser.bottomAnchor, constant: 1).isActive = true
+        nameLine.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        nameLine.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        nameLine.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        nameLine.alpha = 12/100
+        
+        nameLine.backgroundColor = CustomColor.shared.grayText
     }
     
     private func setupLastNameLabel() {
@@ -147,6 +178,16 @@ class SettingViewController: UIViewController {
         lastNameUser.alpha = 54/100
     }
     
+    private func setupLastNameLine() {
+        lastNameLine.topAnchor.constraint(equalTo: lastNameUser.bottomAnchor, constant: 1).isActive = true
+        lastNameLine.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        lastNameLine.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        lastNameLine.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        lastNameLine.alpha = 12/100
+        
+        lastNameLine.backgroundColor = CustomColor.shared.grayText
+    }
+    
     private func setupMailLabel() {
         mailLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
         mailLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
@@ -168,6 +209,16 @@ class SettingViewController: UIViewController {
         mailUser.textAlignment = .left
         mailUser.textColor = CustomColor.shared.grayText
         mailUser.alpha = 54/100
+    }
+    
+    private func setupMailLine() {
+        mailLine.topAnchor.constraint(equalTo: mailUser.bottomAnchor, constant: 1).isActive = true
+        mailLine.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        mailLine.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        mailLine.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        mailLine.alpha = 12/100
+        
+        mailLine.backgroundColor = CustomColor.shared.grayText
     }
     
     private func setupPhoneLabel() {
@@ -193,6 +244,16 @@ class SettingViewController: UIViewController {
         phoneUser.alpha = 54/100
     }
     
+    private func setupPhoneLine() {
+        phoneLine.topAnchor.constraint(equalTo: phoneUser.bottomAnchor, constant: 1).isActive = true
+        phoneLine.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        phoneLine.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        phoneLine.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        phoneLine.alpha = 12/100
+        
+        phoneLine.backgroundColor = CustomColor.shared.grayText
+    }
+    
     private func setupAboutLabel() {
         aboutLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
         aboutLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
@@ -216,6 +277,16 @@ class SettingViewController: UIViewController {
         aboutUser.alpha = 54/100
     }
     
+    private func setupAboutLine() {
+        aboutLine.topAnchor.constraint(equalTo: aboutUser.bottomAnchor, constant: 1).isActive = true
+        aboutLine.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        aboutLine.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        aboutLine.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        aboutLine.alpha = 12/100
+        
+        aboutLine.backgroundColor = CustomColor.shared.grayText
+    }
+    
     private func setupForgetSetting() {
         forgetSettingButton.topAnchor.constraint(equalTo: aboutUser.bottomAnchor, constant: 150).isActive = true
         forgetSettingButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
@@ -235,47 +306,54 @@ class SettingViewController: UIViewController {
 
 extension SettingViewController {
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        scrollView.contentSize.height = forgetSettingButton.frame.maxY - 100
+    }
+    
     @objc func settingButtonAction(_ sender: UIBarButtonItem) {
         self.runActivityIndicator()
-
+        
         ref = Database.database().reference()
         
-        guard let name = nameUser.text, let lastName = lastNameUser.text,
-            let phone = phoneUser.text, let email = mailUser.text,
-            let about = aboutUser.text else { return }
+        guard var name = nameUser.text, var lastName = lastNameUser.text,
+            var phone = phoneUser.text, var email = mailUser.text,
+            var about = aboutUser.text else { return }
         
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
-        if !email.isEmpty && !phone.isEmpty {
-            
-            let newUser = [
-                "name" : name,
-                "lastName" : lastName,
-                "email" : email,
-                "phone" : phone,
-                "about" : about
-            ]
-            let childUpdates = ["/users/\(userID)": newUser]
-            ref.updateChildValues(childUpdates)
-            self.stopActivityIndicator()
-            self.showBasicAlert(title: "Успешно", message: "Изменения сохранены")
-            
-        } else {
-            
-            let newUser = [
-                "name" : name,
-                "lastName" : lastName,
-                "email" : user.email,
-                "phone" : user.phone,
-                "about" : about
-            ]
-            
-            let childUpdates = ["/users/\(userID)": newUser]
-            ref.updateChildValues(childUpdates)
-            self.stopActivityIndicator()
-            self.showBasicAlert(title: "Успешно", message: "Изменения сохранены")
+        if name.count == 0 {
+            name = user.name
         }
+        if lastName.count == 0 {
+            lastName = user.lastName
+        }
+        if email.count == 0 {
+            email = user.email
+        }
+        if phone.count == 0 {
+            phone = user.phone
+        }
+        if about.count == 0 {
+            about = user.about
+        }
+        
+        let newUser = [
+            "name" : name,
+            "lastName" : lastName,
+            "email" : email,
+            "phone" : phone,
+            "about" : about
+        ]
+        
+        let childUpdates = ["/users/\(userID)": newUser]
+        ref.updateChildValues(childUpdates)
+        self.stopActivityIndicator()
+        self.showBasicAlert(title: "Успешно", message: "Изменения сохранены")
+        
     }
 }
+
 
 
