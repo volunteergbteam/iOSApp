@@ -3,6 +3,8 @@ import UIKit
 import MaterialComponents.MaterialButtons
 import MaterialComponents.MaterialButtons_Theming
 import MaterialComponents.MaterialColorScheme
+import FirebaseDatabase
+import FirebaseAuth
 
 class ProfileViewController: UIViewController {
     
@@ -12,17 +14,21 @@ class ProfileViewController: UIViewController {
            return view
        }()
     
+    var ref: DatabaseReference!
+    
     var nameLabel = UILabel()
     var nameUser = UILabel()
     var mailLabel = UILabel()
     var mailUser = UILabel()
+    var phoneLabel = UILabel()
+    var phoneUser = UILabel()
     var cityLabel = UILabel()
     var cityUser = UILabel()
     var aboutLabel = UILabel()
     var aboutUser = UILabel()
     var actionEventButton = MDCButton()
     var myEventButton = MDCButton()
-    var quitButton = MDCButton()
+    var settingButton = MDCButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +51,8 @@ class ProfileViewController: UIViewController {
         setupNameUser()
         setupMailLabel()
         setupMailUser()
+        setupPhoneLabel()
+        setupPhoneUser()
         setupCityLabel()
         setupCityUser()
         setupAboutLabel()
@@ -52,6 +60,36 @@ class ProfileViewController: UIViewController {
         setupActionEvent()
         setupMyEvent()
         setupQuit()
+        
+        getApi()
+    }
+    
+    private func getApi() {
+        runActivityIndicator()
+        let userID = Auth.auth().currentUser?.uid
+        ref = Database.database().reference()
+        ref.child("users").child(userID!).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let username = value?["name"] as? String ?? ""
+            let userLastName = value?["lastName"] as? String ?? ""
+            let userEmail = value?["email"] as? String ?? ""
+            let userCity = value?["city"] as? String ?? ""
+            let userPhone = value?["phone"] as? String ?? ""
+            let userAbout = value?["about"] as? String ?? ""
+            
+            let user = User(name: username, lastName: userLastName, email: userEmail, phone: userPhone, city: userCity, about: userAbout)
+            self.nameUser.text = user.name + " " + user.lastName
+            self.mailUser.text = user.email
+            self.phoneUser.text = user.phone
+            self.cityUser.text = user.city
+            self.aboutUser.text = user.about
+            
+            self.stopActivityIndicator()
+        }) { (error) in
+            self.stopActivityIndicator()
+            print(error.localizedDescription)
+        }
     }
     
     private func settingNavBar() {
@@ -67,13 +105,15 @@ class ProfileViewController: UIViewController {
         scrollView.addSubview(nameUser)
         scrollView.addSubview(mailLabel)
         scrollView.addSubview(mailUser)
+        scrollView.addSubview(phoneLabel)
+        scrollView.addSubview(phoneUser)
         scrollView.addSubview(cityLabel)
         scrollView.addSubview(cityUser)
         scrollView.addSubview(aboutLabel)
         scrollView.addSubview(aboutUser)
         scrollView.addSubview(actionEventButton)
         scrollView.addSubview(myEventButton)
-        scrollView.addSubview(quitButton)
+        scrollView.addSubview(settingButton)
     }
     
     private func setupElements() {
@@ -81,13 +121,15 @@ class ProfileViewController: UIViewController {
         nameUser.translatesAutoresizingMaskIntoConstraints = false
         mailLabel.translatesAutoresizingMaskIntoConstraints = false
         mailUser.translatesAutoresizingMaskIntoConstraints = false
+        phoneLabel.translatesAutoresizingMaskIntoConstraints = false
+        phoneUser.translatesAutoresizingMaskIntoConstraints = false
         cityLabel.translatesAutoresizingMaskIntoConstraints = false
         cityUser.translatesAutoresizingMaskIntoConstraints = false
         aboutLabel.translatesAutoresizingMaskIntoConstraints = false
         aboutUser.translatesAutoresizingMaskIntoConstraints = false
         actionEventButton.translatesAutoresizingMaskIntoConstraints = false
         myEventButton.translatesAutoresizingMaskIntoConstraints = false
-        quitButton.translatesAutoresizingMaskIntoConstraints = false
+        settingButton.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupNameLabel() {
@@ -111,7 +153,6 @@ class ProfileViewController: UIViewController {
         nameUser.textAlignment = .left
         nameUser.textColor = CustomColor.shared.grayText
         nameUser.alpha = 54/100
-        nameUser.text = "Иванов Иван"
     }
     
     private func setupMailLabel() {
@@ -134,13 +175,34 @@ class ProfileViewController: UIViewController {
         mailUser.textAlignment = .left
         mailUser.textColor = CustomColor.shared.grayText
         mailUser.alpha = 54/100
-        mailUser.text = "email@gmail.com"
+    }
+    
+    private func setupPhoneLabel() {
+        phoneLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        phoneLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        phoneLabel.topAnchor.constraint(equalTo: mailUser.bottomAnchor, constant: 20).isActive = true
+        
+        phoneLabel.font = UIFont.systemFont(ofSize: 18)
+        phoneLabel.textAlignment = .left
+        phoneLabel.textColor = CustomColor.shared.grayText
+        phoneLabel.text = "Телефон"
+    }
+    
+    private func setupPhoneUser() {
+        phoneUser.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        phoneUser.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        phoneUser.topAnchor.constraint(equalTo: phoneLabel.bottomAnchor, constant: 1).isActive = true
+        
+        phoneUser.font = UIFont.systemFont(ofSize: 20)
+        phoneUser.textAlignment = .left
+        phoneUser.textColor = CustomColor.shared.grayText
+        phoneUser.alpha = 54/100
     }
     
     private func setupCityLabel() {
         cityLabel.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
         cityLabel.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
-        cityLabel.topAnchor.constraint(equalTo: mailUser.bottomAnchor, constant: 20).isActive = true
+        cityLabel.topAnchor.constraint(equalTo: phoneUser.bottomAnchor, constant: 20).isActive = true
         
         cityLabel.font = UIFont.systemFont(ofSize: 18)
         cityLabel.textAlignment = .left
@@ -157,7 +219,6 @@ class ProfileViewController: UIViewController {
         cityUser.textAlignment = .left
         cityUser.textColor = CustomColor.shared.grayText
         cityUser.alpha = 54/100
-        cityUser.text = "Омск"
     }
     
     private func setupAboutLabel() {
@@ -182,7 +243,6 @@ class ProfileViewController: UIViewController {
         aboutUser.numberOfLines = 0
         aboutUser.textColor = CustomColor.shared.grayText
         aboutUser.alpha = 54/100
-        aboutUser.text = "Всегда хотел помогать людям, вот и начну пожалуй с сегодня."
     }
     
     private func setupActionEvent() {
@@ -216,19 +276,19 @@ class ProfileViewController: UIViewController {
     }
     
     private func setupQuit() {
-        quitButton.topAnchor.constraint(equalTo: myEventButton.bottomAnchor, constant: 10).isActive = true
-        quitButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
-        quitButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
-        quitButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10).isActive = true
-        quitButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        settingButton.topAnchor.constraint(equalTo: myEventButton.bottomAnchor, constant: 10).isActive = true
+        settingButton.leftAnchor.constraint(equalTo: scrollView.leftAnchor, constant: 15).isActive = true
+        settingButton.rightAnchor.constraint(equalTo: scrollView.rightAnchor, constant: -15).isActive = true
+        settingButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 10).isActive = true
+        settingButton.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
-        quitButton.setTitle("НАСТРОЙКИ", for: .normal)
-        quitButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
-        quitButton.setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
+        settingButton.setTitle("НАСТРОЙКИ", for: .normal)
+        settingButton.setElevation(ShadowElevation(rawValue: 6), for: .normal)
+        settingButton.setElevation(ShadowElevation(rawValue: 12), for: .highlighted)
         let containerScheme = MDCContainerScheme()
         containerScheme.colorScheme.primaryColor = CustomColor.shared.blueButton
-        quitButton.applyContainedTheme(withScheme: containerScheme)
-        quitButton.addTarget(self, action: #selector(settingButtonAction(_:)), for: .touchUpInside)
+        settingButton.applyContainedTheme(withScheme: containerScheme)
+        settingButton.addTarget(self, action: #selector(settingButtonAction(_:)), for: .touchUpInside)
     }
 
 }
@@ -236,7 +296,6 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController {
     
     @objc func eventAction(_ sender: UIButton!) {
-        //let ActionViewController = ActionEventViewController()
         navigationController?.pushViewController(ActiveEventsCollectionVC(), animated: true)
         let backButton = UIBarButtonItem()
         backButton.title = ""
@@ -252,7 +311,7 @@ extension ProfileViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        scrollView.contentSize.height = quitButton.frame.maxY - 50
+        scrollView.contentSize.height = settingButton.frame.maxY - 50
     }
     
 }

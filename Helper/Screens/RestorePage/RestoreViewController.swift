@@ -3,6 +3,7 @@ import UIKit
 import MaterialComponents.MaterialButtons
 import MaterialComponents.MaterialButtons_Theming
 import MaterialComponents.MaterialColorScheme
+import FirebaseAuth
 
 class RestoreViewController: UIViewController {
     
@@ -96,8 +97,21 @@ class RestoreViewController: UIViewController {
 extension RestoreViewController {
     
     @objc func restoreAction(_ sender: UIButton!) {
-           print("Restore password is completed. Return on main view")
-       }
-    
+        
+        // check text fileds
+        guard let emeil = restoreTextField.text, restoreTextField.text?.count ?? 0 > 0 else { return }
+
+        // auth
+        runActivityIndicator()
+        Auth.auth().sendPasswordReset(withEmail: emeil) { [weak self] error in
+            if let error = error {
+                self?.stopActivityIndicator()
+                self?.showBasicAlert(title: "Неверный email", message: error.localizedDescription)
+            } else {
+                self?.stopActivityIndicator()
+                self?.showBasicAlert(title: "Успешно", message: "Пожалуйста, зайдите на свою почту и пройдите по ссылке для восстановления вашего пароля")
+            }
+        }
+    }
 }
 
