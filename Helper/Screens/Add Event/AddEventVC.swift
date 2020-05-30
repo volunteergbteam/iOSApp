@@ -28,6 +28,8 @@ class AddEventVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
             locationManager.startUpdatingLocation()
         }
         
+        adressTextField.addTarget(self, action: #selector(adressFieldDidChange), for: .editingDidEnd)
+        adressTextField.inputAccessoryView = getToolBar()
     }
     
     func getStringForLocation(location: CLLocationCoordinate2D){
@@ -76,5 +78,25 @@ class AddEventVC: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate
         let annotation = MKPointAnnotation()
         annotation.coordinate = mapView.region.center
         mapView.addAnnotation(annotation)
+    }
+    
+    @objc func adressFieldDidChange(_ textField: UITextField){
+        guard let text = textField.text else { return }
+        let geoCoder = CLGeocoder()
+        geoCoder.geocodeAddressString(text) {[weak self] (placemarks, error) in
+            if let _ = error {
+                // handle error
+            } else {
+                guard let placemarks = placemarks, let location = placemarks.first?.location else { return }
+                let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                self?.mapView.setRegion(region, animated: true)
+                self?.mapView.removeAnnotations(self!.mapView.annotations)
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2D(latitude: location.coordinate.latitude,
+                                                               longitude: location.coordinate.longitude)
+                self?.mapView.addAnnotation(annotation)
+            }
+        }
     }
 }
