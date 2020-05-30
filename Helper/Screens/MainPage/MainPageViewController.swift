@@ -43,6 +43,7 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate {
         let containerScheme = MDCContainerScheme()
         containerScheme.colorScheme.primaryColor = CustomColor.shared.marineButton
         askForHelpButton.applyContainedTheme(withScheme: containerScheme)
+        askForHelpButton.addTarget(self, action: #selector(addEventAction), for: .touchUpInside)
         
         //setup search field
         searchField.inputAccessoryView = getToolBar()
@@ -86,5 +87,9 @@ class MainPageViewController: UIViewController, CLLocationManagerDelegate {
             userLocation.longitude = location.coordinate.longitude
             //mapView.setRegion(region, animated: true)
         }
+    }
+    
+    @objc func addEventAction(_ sender: UIButton){
+        self.navigationController?.pushViewController(AddEventVC(), animated: true)
     }
 }
