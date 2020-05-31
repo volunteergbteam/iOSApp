@@ -31,7 +31,7 @@ class TabViewController: UITabBarController, MDCBottomNavigationBarDelegate {
         // Set view controllers
         let profileNavController = UINavigationController(rootViewController: ProfileViewController())
         let navController = UINavigationController(rootViewController: MainPageViewController())
-        let messangerNavController = UINavigationController(rootViewController: MessangerViewController())
+        let messangerNavController = UINavigationController(rootViewController: MessagerCollectionVC())
         viewControllers = [profileNavController, navController, messangerNavController]
         
         // Set tabBarItems
