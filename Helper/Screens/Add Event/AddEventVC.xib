@@ -9,10 +9,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddEventVC" customModule="Helper" customModuleProvider="target">
             <connections>
-                <outlet property="adressTextField" destination="5rq-I8-g3v" id="AvE-bd-CzV"/>
-                <outlet property="descriptionTextField" destination="rlP-My-7XE" id="TO5-he-od1"/>
-                <outlet property="mapView" destination="ShQ-MI-SFK" id="bGs-dp-g7s"/>
-                <outlet property="titleTextField" destination="4uu-mE-v9d" id="EzK-1g-DuH"/>
+                <outlet property="addEventButton" destination="pVd-SB-iag" id="ZBu-8z-bPx"/>
+                <outlet property="adressTextField" destination="YIZ-nj-fZ0" id="yuh-8v-Cob"/>
+                <outlet property="descriptionTextView" destination="CV8-0N-jD1" id="ndt-gv-btI"/>
+                <outlet property="mapView" destination="f5j-IF-TLF" id="SEw-1N-Hdj"/>
+                <outlet property="priorityView" destination="hR7-08-IHW" id="Kf8-Tk-keK"/>
+                <outlet property="scrollView" destination="ocA-c7-qgK" id="mfd-Ep-suP"/>
+                <outlet property="titleTextField" destination="773-PD-mqK" id="IeQ-sa-GTV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -21,62 +24,90 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ShQ-MI-SFK">
-                    <rect key="frame" x="0.0" y="44" width="414" height="304"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocA-c7-qgK">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Краткое описание" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="773-PD-mqK">
+                            <rect key="frame" x="30" y="485" width="354" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="7bi-hu-Vwd"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ваш адресс" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YIZ-nj-fZ0">
+                            <rect key="frame" x="30" y="415" width="354" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="ZN4-24-lYk"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hR7-08-IHW">
+                            <rect key="frame" x="30" y="334" width="354" height="32"/>
+                            <segments>
+                                <segment title="Не срочно"/>
+                                <segment title="Срочно"/>
+                                <segment title="Очень срочно"/>
+                            </segments>
+                        </segmentedControl>
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="f5j-IF-TLF">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="304"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="304" id="xfm-LV-zbA"/>
+                            </constraints>
+                        </mapView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="clip" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pVd-SB-iag" customClass="MDCFlatButton">
+                            <rect key="frame" x="30" y="675" width="354" height="45"/>
+                            <color key="backgroundColor" red="0.0" green="0.58823529409999997" blue="0.53333333329999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="XdV-wV-NBs"/>
+                            </constraints>
+                            <state key="normal" title="Попросить о помощи">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Подробное описание" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CV8-0N-jD1">
+                            <rect key="frame" x="30" y="545" width="354" height="80"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="80" id="Nvm-7P-bEL"/>
+                            </constraints>
+                            <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="304" id="wvV-tv-ASq"/>
+                        <constraint firstItem="f5j-IF-TLF" firstAttribute="leading" secondItem="ocA-c7-qgK" secondAttribute="leading" id="AZy-hK-R82"/>
+                        <constraint firstItem="f5j-IF-TLF" firstAttribute="top" secondItem="ocA-c7-qgK" secondAttribute="top" id="BV9-vj-1gi"/>
+                        <constraint firstItem="hR7-08-IHW" firstAttribute="leading" secondItem="ocA-c7-qgK" secondAttribute="leading" constant="30" id="Bob-vK-fVh"/>
+                        <constraint firstItem="hR7-08-IHW" firstAttribute="top" secondItem="f5j-IF-TLF" secondAttribute="bottom" constant="30" id="DdB-FI-X6n"/>
+                        <constraint firstItem="CV8-0N-jD1" firstAttribute="leading" secondItem="ocA-c7-qgK" secondAttribute="leading" constant="30" id="Gfw-yb-gmS"/>
+                        <constraint firstItem="773-PD-mqK" firstAttribute="top" secondItem="YIZ-nj-fZ0" secondAttribute="bottom" constant="30" id="HX7-Pt-uD9"/>
+                        <constraint firstAttribute="bottom" secondItem="pVd-SB-iag" secondAttribute="bottom" constant="78" id="ISe-Xe-uzd"/>
+                        <constraint firstAttribute="trailing" secondItem="773-PD-mqK" secondAttribute="trailing" constant="30" id="KOG-fF-MyK"/>
+                        <constraint firstItem="pVd-SB-iag" firstAttribute="top" secondItem="CV8-0N-jD1" secondAttribute="bottom" constant="50" id="Kh7-cS-c4j"/>
+                        <constraint firstAttribute="trailing" secondItem="hR7-08-IHW" secondAttribute="trailing" constant="30" id="OaU-wm-OS8"/>
+                        <constraint firstItem="f5j-IF-TLF" firstAttribute="centerX" secondItem="ocA-c7-qgK" secondAttribute="centerX" id="R33-Fi-CSE"/>
+                        <constraint firstItem="773-PD-mqK" firstAttribute="leading" secondItem="ocA-c7-qgK" secondAttribute="leading" constant="30" id="Z41-Lb-NeT"/>
+                        <constraint firstAttribute="trailing" secondItem="YIZ-nj-fZ0" secondAttribute="trailing" constant="30" id="cyX-Hm-qqU"/>
+                        <constraint firstItem="CV8-0N-jD1" firstAttribute="top" secondItem="773-PD-mqK" secondAttribute="bottom" constant="20" id="gr2-SG-YQu"/>
+                        <constraint firstItem="pVd-SB-iag" firstAttribute="leading" secondItem="ocA-c7-qgK" secondAttribute="leading" constant="30" id="heM-Fv-LJX"/>
+                        <constraint firstAttribute="trailing" secondItem="pVd-SB-iag" secondAttribute="trailing" constant="30" id="jD3-aO-x8C"/>
+                        <constraint firstAttribute="trailing" secondItem="CV8-0N-jD1" secondAttribute="trailing" constant="30" id="lea-ZT-Fdh"/>
+                        <constraint firstItem="YIZ-nj-fZ0" firstAttribute="leading" secondItem="ocA-c7-qgK" secondAttribute="leading" constant="30" id="mjq-1e-3o8"/>
+                        <constraint firstAttribute="trailing" secondItem="f5j-IF-TLF" secondAttribute="trailing" id="tJO-Cv-WWx"/>
+                        <constraint firstItem="YIZ-nj-fZ0" firstAttribute="top" secondItem="hR7-08-IHW" secondAttribute="bottom" constant="50" id="uiB-qX-nDJ"/>
                     </constraints>
-                </mapView>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ваш адресс" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5rq-I8-g3v">
-                    <rect key="frame" x="30" y="459" width="354" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="kFx-ZC-kkJ"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Краткое описание" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4uu-mE-v9d">
-                    <rect key="frame" x="30" y="529" width="354" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="nN4-dX-Zfb"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Подброчное описание" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rlP-My-7XE">
-                    <rect key="frame" x="30" y="599" width="354" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Uym-Du-tFz"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ybg-QE-RiB">
-                    <rect key="frame" x="30" y="378" width="354" height="32"/>
-                    <segments>
-                        <segment title="Не срочно"/>
-                        <segment title="Срочно"/>
-                        <segment title="Очень срочно"/>
-                    </segments>
-                </segmentedControl>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="5rq-I8-g3v" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="2dF-aT-0Ux"/>
-                <constraint firstItem="5rq-I8-g3v" firstAttribute="top" secondItem="ybg-QE-RiB" secondAttribute="bottom" constant="50" id="8Cm-Id-W4W"/>
-                <constraint firstItem="ybg-QE-RiB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="JAd-6U-pBi"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="4uu-mE-v9d" secondAttribute="trailing" constant="30" id="LdZ-jc-3Vf"/>
-                <constraint firstItem="4uu-mE-v9d" firstAttribute="top" secondItem="5rq-I8-g3v" secondAttribute="bottom" constant="30" id="NsX-pq-cx4"/>
-                <constraint firstItem="rlP-My-7XE" firstAttribute="top" secondItem="4uu-mE-v9d" secondAttribute="bottom" constant="30" id="PSQ-tl-QSw"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rlP-My-7XE" secondAttribute="trailing" constant="30" id="W8j-12-x4l"/>
-                <constraint firstItem="ybg-QE-RiB" firstAttribute="top" secondItem="ShQ-MI-SFK" secondAttribute="bottom" constant="30" id="WZq-LO-XFG"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ybg-QE-RiB" secondAttribute="trailing" constant="30" id="eY5-Ep-P7r"/>
-                <constraint firstItem="rlP-My-7XE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="iN2-fn-a1h"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5rq-I8-g3v" secondAttribute="trailing" constant="30" id="kwJ-j6-zgA"/>
-                <constraint firstItem="4uu-mE-v9d" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="p2R-3w-UsR"/>
-                <constraint firstItem="ShQ-MI-SFK" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="phv-bu-Icp"/>
-                <constraint firstItem="ShQ-MI-SFK" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="tq5-Su-09U"/>
-                <constraint firstItem="ShQ-MI-SFK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="tys-b2-Mcn"/>
+                <constraint firstItem="ocA-c7-qgK" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Dwv-ic-tfS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ocA-c7-qgK" secondAttribute="bottom" id="i0S-qC-QcV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ocA-c7-qgK" secondAttribute="trailing" id="rpp-57-ekX"/>
+                <constraint firstItem="ocA-c7-qgK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="sMz-bz-6bS"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="137.68115942028987" y="134.59821428571428"/>

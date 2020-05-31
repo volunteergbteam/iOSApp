@@ -46,6 +46,7 @@ extension MainPageViewController {
         let center = CLLocationCoordinate2D(latitude: currentArea.lat, longitude: currentArea.lon)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2))
         mapView.setRegion(region, animated: true)
+        askForHelpButton.isEnabled = true
     }
     
     //MARK: - Firebase BD reading
@@ -77,8 +78,9 @@ extension MainPageViewController {
         // get all data for aread id
         let areaId = currentArea.id
         ref.child("events").child("\(areaId)").observeSingleEvent(of: .value, with: {[weak self] (snapshot) in
-            guard let areasArray = snapshot.value as? Array<NSDictionary> else { return } // do something with error
-            for (index, value) in areasArray.enumerated() {
+            guard let dict = snapshot.value as? NSDictionary else { return }
+            for (index, key) in dict.allKeys.enumerated() {
+                guard let value = dict[key] as? NSDictionary else { return }
                 let id = index
                 let title = value["title"] as? String ?? ""
                 let lon = value["lon"] as? Double ?? 0
